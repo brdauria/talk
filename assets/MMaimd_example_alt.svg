@@ -1,0 +1,157 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900">
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L8,3 L0,6 Z" fill="black"/>
+    </marker>
+    <marker id="arrowG" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L8,3 L0,6 Z" fill="#178a2f"/>
+    </marker>
+    <marker id="arrowB" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L8,3 L0,6 Z" fill="#1268b3"/>
+    </marker>
+    <marker id="arrowO" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L8,3 L0,6 Z" fill="#e66100"/>
+    </marker>
+  </defs>
+
+  <style>
+    .title { font: bold 36px sans-serif; }
+    .label { font: 24px sans-serif; }
+    .small { font: 20px sans-serif; }
+    .math { font: italic 25px serif; }
+    .axis { stroke: black; stroke-width: 3; marker-end: url(#arrow); }
+    .dash { stroke: black; stroke-width: 2; stroke-dasharray: 8 8; }
+    .green { stroke: #178a2f; fill: none; stroke-width: 3; }
+    .blue { stroke: #1268b3; fill: none; stroke-width: 3; }
+    .orange { stroke: #e66100; fill: none; stroke-width: 3; }
+    .gfill { fill: #178a2f; }
+    .bfill { fill: #1268b3; }
+    .ofill { fill: #e66100; }
+    .openG { fill: white; stroke: #178a2f; stroke-width: 3; }
+    .openB { fill: white; stroke: #1268b3; stroke-width: 3; }
+    .openO { fill: white; stroke: #e66100; stroke-width: 3; }
+  </style>
+
+  <rect width="1600" height="900" fill="white"/>
+
+  <text x="800" y="60" text-anchor="middle" class="title">
+    Markov Modulated AIMD Process
+  </text>
+
+  <!-- axes -->
+  <line x1="100" y1="630" x2="1540" y2="630" class="axis"/>
+  <line x1="100" y1="630" x2="100" y2="130" class="axis"/>
+
+  <text x="72" y="642" class="label">0</text>
+  <text x="1515" y="675" class="math">t</text>
+  <text x="25" y="130" class="math">X(t)</text>
+
+  <!-- environment change times: at jump abscissae -->
+  <line x1="320" y1="150" x2="320" y2="630" class="dash"/>
+  <line x1="900" y1="150" x2="900" y2="630" class="dash"/>
+
+  <!-- background regions -->
+  <rect x="100" y="150" width="220" height="480" fill="#178a2f" opacity="0.08"/>
+  <rect x="320" y="150" width="580" height="480" fill="#1268b3" opacity="0.08"/>
+  <rect x="900" y="150" width="610" height="480" fill="#e66100" opacity="0.08"/>
+
+  <!-- labels -->
+  <text x="210" y="195" text-anchor="middle" class="label" fill="#178a2f" font-weight="bold">Environment E₁</text>
+  <text x="210" y="225" text-anchor="middle" class="small" fill="#178a2f">slope 1/c₁, factor p₁</text>
+
+  <text x="610" y="195" text-anchor="middle" class="label" fill="#1268b3" font-weight="bold">Environment E₂</text>
+  <text x="610" y="225" text-anchor="middle" class="small" fill="#1268b3">slope 1/c₂, factor p₂</text>
+
+  <text x="1205" y="195" text-anchor="middle" class="label" fill="#e66100" font-weight="bold">Environment E₃</text>
+  <text x="1205" y="225" text-anchor="middle" class="small" fill="#e66100">slope 1/c₃, factor p₃</text>
+
+  <!-- E1: fixed slope m1 = -1.00 in SVG coordinates -->
+  <polyline points="100,630 320,410" class="green"/>
+  <circle cx="320" cy="410" r="7" class="gfill"/>
+  <line x1="320" y1="410" x2="320" y2="555" class="green" marker-end="url(#arrowG)"/>
+  <circle cx="320" cy="555" r="7" class="openG"/>
+
+  <!-- E2: fixed slope m2 = -0.55 -->
+  <polyline points="320,555 540,434" class="blue"/>
+  <circle cx="540" cy="434" r="7" class="bfill"/>
+  <line x1="540" y1="434" x2="540" y2="555" class="blue" marker-end="url(#arrowB)"/>
+  <circle cx="540" cy="555" r="7" class="openB"/>
+
+  <polyline points="540,555 760,434" class="blue"/>
+  <circle cx="760" cy="434" r="7" class="bfill"/>
+  <line x1="760" y1="434" x2="760" y2="555" class="blue" marker-end="url(#arrowB)"/>
+  <circle cx="760" cy="555" r="7" class="openB"/>
+
+  <polyline points="760,555 900,478" class="blue"/>
+  <circle cx="900" cy="478" r="7" class="bfill"/>
+  <line x1="900" y1="478" x2="900" y2="580" class="blue" marker-end="url(#arrowB)"/>
+  <circle cx="900" cy="580" r="7" class="openB"/>
+
+  <!-- E3: fixed slope m3 = -1.25 -->
+  <polyline points="900,580 1060,380" class="orange"/>
+  <circle cx="1060" cy="380" r="7" class="ofill"/>
+  <line x1="1060" y1="380" x2="1060" y2="565" class="orange" marker-end="url(#arrowO)"/>
+  <circle cx="1060" cy="565" r="7" class="openO"/>
+
+  <polyline points="1060,565 1240,340" class="orange"/>
+  <circle cx="1240" cy="340" r="7" class="ofill"/>
+  <line x1="1240" y1="340" x2="1240" y2="535" class="orange" marker-end="url(#arrowO)"/>
+  <circle cx="1240" cy="535" r="7" class="openO"/>
+
+  <polyline points="1240,535 1420,310" class="orange"/>
+  <circle cx="1420" cy="310" r="7" class="ofill"/>
+  <line x1="1420" y1="310" x2="1420" y2="505" class="orange" marker-end="url(#arrowO)"/>
+  <circle cx="1420" cy="505" r="7" class="openO"/>
+
+  <!-- slope indicators -->
+  <path d="M175 555 H225 V505" fill="none" stroke="#178a2f" stroke-width="2"/>
+  <text x="232" y="548" class="math">1/c₁</text>
+
+  <path d="M610 535 H660 V507.5" fill="none" stroke="#1268b3" stroke-width="2"/>
+  <text x="668" y="530" class="math">1/c₂</text>
+
+  <path d="M1130 515 H1180 V452.5" fill="none" stroke="#e66100" stroke-width="2"/>
+  <text x="1188" y="505" class="math">1/c₃</text>
+
+  <!-- jump labels -->
+  <text x="330" y="490" class="math">× p₁</text>
+  <text x="548" y="500" class="math">× p₂</text>
+  <text x="1070" y="480" class="math">× p₃</text>
+
+  <!-- environment change annotations -->
+  <text x="320" y="105" text-anchor="middle" class="small" font-weight="bold">environment changes</text>
+  <path d="M295,118 C325,145 330,180 320,405" fill="none" stroke="black" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <text x="900" y="105" text-anchor="middle" class="small" font-weight="bold">environment changes</text>
+  <path d="M875,118 C905,145 910,180 900,475" fill="none" stroke="black" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- explanatory box -->
+  <rect x="120" y="695" width="1360" height="145" rx="18" fill="white" stroke="#cccccc" stroke-width="2"/>
+
+  <text x="160" y="735" class="label" font-weight="bold">Interpretation</text>
+  <text x="160" y="770" class="small">
+    In environment Eᵢ the increase is linear with fixed slope 1/cᵢ.
+  </text>
+  <text x="160" y="802" class="small">
+    At selected jump times the process is multiplied by pᵢ, and the Markov environment may change.
+  </text>
+  <text x="160" y="832" class="small">
+    The dashed vertical lines are drawn at jump abscissae where the environment changes.
+  </text>
+
+  <!-- Markov chain inset -->
+  <circle cx="1060" cy="765" r="34" fill="#178a2f" opacity="0.16" stroke="#178a2f" stroke-width="3"/>
+  <circle cx="1190" cy="765" r="34" fill="#1268b3" opacity="0.16" stroke="#1268b3" stroke-width="3"/>
+  <circle cx="1320" cy="765" r="34" fill="#e66100" opacity="0.16" stroke="#e66100" stroke-width="3"/>
+
+  <text x="1060" y="773" text-anchor="middle" class="math">E₁</text>
+  <text x="1190" y="773" text-anchor="middle" class="math">E₂</text>
+  <text x="1320" y="773" text-anchor="middle" class="math">E₃</text>
+
+  <line x1="1094" y1="765" x2="1150" y2="765" stroke="black" stroke-width="2" marker-end="url(#arrow)"/>
+  <line x1="1224" y1="765" x2="1280" y2="765" stroke="black" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <path d="M1050,730 C1020,700 1085,690 1070,730" fill="none" stroke="black" stroke-width="2" marker-end="url(#arrow)"/>
+  <path d="M1180,730 C1150,700 1215,690 1200,730" fill="none" stroke="black" stroke-width="2" marker-end="url(#arrow)"/>
+  <path d="M1310,730 C1280,700 1345,690 1330,730" fill="none" stroke="black" stroke-width="2" marker-end="url(#arrow)"/>
+</svg>

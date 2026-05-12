@@ -1,0 +1,969 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Exit Problems for AIMD Markov-Modulated Processes</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5/dist/reveal.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5/dist/theme/white.css" />
+  <link rel="stylesheet" href="assets/slides.css" />
+</head>
+
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+      <!--<section>
+        <h2>SVG Debug</h2>
+        <pre>
+        <code id="svg-debug" class="language-html"></code>
+        </pre>
+      </section>-->
+
+      <section class="title-slide">
+        <a href="https://ecqt2026.sciencesconf.org" target="_blank" rel="noopener noreferrer"><span class="kicker">ECQT 2026, 11-13 May 2026 Reykjavík (Iceland)</span></a>
+        <h1>Exit Problems for<br />Additive-Increase Multiplicative-Decrease<br />Markov-Modulated Processes</h1>
+        <p><strong>Bernardo D'Auria</strong> <span class="muted">(University of Padova)</span></p>
+        <p class="muted">Joint work with <strong>Zbigniew Palmowski</strong> <span class="muted">(Wrocław University of
+            Science and Technology)</span></p>
+        <aside class="notes">
+          Open with the scalar AIMD picture, then state the Markov-modulated extension. Emphasize the goal:
+          matrix-valued exit transforms and a constructive method.
+        </aside>
+      </section>
+      <section>
+        <section>
+          <h2>AIMD processes</h2>
+          <div class="definition-box compact">
+            <p><strong>AIMD</strong> means <em>Additive-Increase Multiplicative-Decrease</em>:<br />a positive process
+              that grows gradually and is reduced proportionally at random decrease epochs.</p>
+          </div>
+          <div class="flow">
+            <div class="node"><strong>additive increase</strong><br /><span class="muted">$X$ grows linearly</span>
+            </div>
+            <div class="arrow">→</div>
+            <div class="node"><strong>random event</strong><br /><span class="muted">loss, congestion, reset</span>
+            </div>
+            <div class="arrow">→</div>
+            <div class="node"><strong>multiplicative decrease</strong><br /><span class="muted">$X\mapsto pX$</span>
+            </div>
+          </div>
+          <div class="callout small"><strong>Pathwise intuition</strong>: upward crossings are continuous; downward
+            crossings occur by jumps.</div>
+          <aside class="notes">
+            Start from the qualitative mechanism. The audience should see the path before seeing exit transforms.
+          </aside>
+        </section>
+
+        <section>
+          <h2>AIMD dynamics</h2>
+          <div class="cols">
+            <div class="card compact">
+              <span class="label">Continuous-time model</span>
+              <p class="eq">\[
+                \frac{dX_t}{dt}=\frac{1}{c},\qquad T_n \le t \lt T_{n+1},
+                \]</p>
+              <p class="eq">\[
+                X(T_n)=pX(T_n-),\qquad 0\lt p\lt1.
+                \]</p>
+              <div class="callout small">A <strong>Poisson clock</strong> with rate $\lambda$ drives the decrease
+                epochs.</div>
+            </div>
+            <div class="card compact">
+              <span class="label">Discrete-time model</span>
+              <p class="eq small">\[
+                X_{n+1}=
+                \begin{cases}
+                X_n + 1/c, & \text{with prob. } (1-\delta),\\
+                p X_n, & \text{with prob. } \delta
+                \end{cases}
+                \qquad 0\lt p \lt1.
+                \]</p>
+            </div>
+          </div>
+        </section>
+
+        <section>
+          <h2>AIMD sample path</h2>
+          <div class="figure-card">
+            <img class="figure" src="assets/aimd_example.svg" alt="Example trajectory of an AIMD process" />
+          </div>
+        </section>
+
+      </section>
+
+      <section>
+        <h2>AIMD and TCP</h2>
+        <div class="definition-box compact">
+          <p><strong>TCP congestion control protocol</strong> is among classical applications:
+            <br />it cautiously increases the <em>transmission rate</em> when transmission succeeds,
+            <br />to decrease it sharply when congestion is detected.
+          </p>
+        </div>
+        <div class="cols">
+          <div class="method-box compact">
+            <span class="label">Successful transmission</span>
+            <p class="eq">\[
+              W\longmapsto W+1
+              \]</p>
+            <p>Probe the available bandwidth by small additive steps.</p>
+          </div>
+          <div class="warning-box compact">
+            <span class="label">Packet loss / congestion</span>
+            <p class="eq">\[
+              W\longmapsto p W,\qquad p\approx\frac{1}{2}.
+              \]</p>
+            <p>React quickly by reducing the current congestion window.</p>
+          </div>
+        </div>
+        <div class="callout small">The same rule balances three goals: stability, fair bandwidth sharing, and adaptation
+          to changing network conditions.</div>
+        <aside class="notes">
+          Mention TCP only as motivation. The mathematical model abstracts away from protocol details.
+        </aside>
+      </section>
+
+
+      <section>
+        <h2>Earlier TCP/AIMD work</h2>
+        <div class="definition-box compact">
+          <p>The TCP motivation led to a probabilistic literature on AIMD and growth-collapse dynamics.</p>
+        </div>
+        <div class="rows">
+          <div class="card compact">
+            <span class="label">Exponential functionals</span>
+            <p class="authors"><strong>Guillemin, Robert, Zwart</strong> (2004)</p>
+            <p class="title small"><em>AIMD algorithms and exponential functionals</em></p>
+            <p class="journal muted small">Ann. Appl. Probab. 14(1), 90-117.</p>
+          </div>
+          <div class="card compact">
+            <span class="label">Growth-collapse model</span>
+            <p class="authors"><strong>Boxma, Perry, Stadje, Zacks</strong> (2006)</p>
+            <p class="title small"><em>A Markovian growth-collapse model</em></p>
+            <p class="journal muted small">Adv. in Appl. Probab. 38(1), 221-243.</p>
+          </div>
+          <div class="card compact">
+            <span class="label">TCP stationarity</span>
+            <p class="authors"><strong>van Leeuwaarden, Löpker, Ott</strong> (2009)</p>
+            <p class="title small"><em>TCP and iso-stationary transformations</em></p>
+            <p class="journal muted small">Queueing Syst. 63, 459-475.</p>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <section>
+          <h2>AIMD and Partial resetting</h2>
+          <div class="definition-box compact">
+            <p>AIMD is one instance of a broader class of <strong>processes with partial resetting</strong>:
+              <br />deterministic or stochastic growth interrupted by resets that keep part of the current state.
+            </p>
+          </div>
+          <div class="cols">
+            <div class="card compact">
+              <span class="label">Search, restart and algorithms</span>
+              <p>Resetting appears in intermittent search and restart mechanisms, from abstract Markov processes to
+                stress-release models.</p>
+              <p class="cite-list">
+                <a href="#/partial-resetting-bibliography">Evans et al. (2020)</a>,
+                <a href="#/partial-resetting-bibliography">Gupta and Jayannavar (2022)</a>,
+                <a href="#/partial-resetting-bibliography">B&eacute;nichou et al. (2011)</a>,
+                <a href="#/partial-resetting-bibliography">Avrachenkov et al. (2013)</a>,
+                <a href="#/partial-resetting-bibliography">Borovkov and Vere-Jones (2000)</a>.
+              </p>
+            </div>
+            <div class="method-box compact">
+              <span class="label">Queueing, clearing and growth-collapse</span>
+              <p>Queueing applications include catastrophe rates, random clearing events and growth-collapse models.</p>
+              <p class="cite-list">
+                <a href="#/partial-resetting-bibliography">Artalejo et al. (2006)</a>,
+                <a href="#/partial-resetting-bibliography">Kella et al. (2003)</a>,
+                <a href="#/partial-resetting-bibliography">Boxma et al. (2006)</a>,
+                <a href="#/partial-resetting-bibliography">L&ouml;pker and Stadje (2011)</a>.
+              </p>
+            </div>
+          </div>
+          <aside class="notes">
+            This slide broadens the motivation without turning the introduction into a literature review. Mention
+            queueing explicitly.
+          </aside>
+        </section>
+
+        <section>
+          <h2>more on Partial resetting</h2>
+          <div class="cols">
+            <div class="card compact">
+              <span class="label">Biology, chemistry and ecology</span>
+              <p>Resetting ideas appear in RNA polymerase recovery, enzymatic reactions, molecular inhibition,
+                pollination and ecological disturbances.</p>
+              <p class="cite-list">
+                <a href="#/partial-resetting-bibliography">Gr&uuml;nwald and Singer (2010)</a>,
+                <a href="#/partial-resetting-bibliography">Roldan et al. (2016)</a>,
+                <a href="#/partial-resetting-bibliography">Berezhkovskii et al. (2016)</a>,
+                <a href="#/partial-resetting-bibliography">Robin et al. (2018, 2019)</a>,
+                <a href="#/partial-resetting-bibliography">Reuveni et al. (2014)</a>.
+              </p>
+            </div>
+            <div class="warning-box compact">
+              <span class="label">Physics, environment and risk</span>
+              <p>Related models are used in stochastic thermodynamics, quantum resetting, environmental jump processes,
+                insurance and financial crashes.</p>
+              <p class="cite-list">
+                <a href="#/partial-resetting-bibliography">Fuchs et al. (2016)</a>,
+                <a href="#/partial-resetting-bibliography">Mukherjee et al. (2018)</a>,
+                <a href="#/partial-resetting-bibliography">Dahlenburg et al. (2021)</a>,
+                <a href="#/partial-resetting-bibliography">Mau et al. (2014)</a>,
+                <a href="#/partial-resetting-bibliography">Suweis et al. (2010)</a>,
+                <a href="#/partial-resetting-bibliography">Akahori et al. (2022)</a>,
+                <a href="#/partial-resetting-bibliography">Sornette (2017)</a>.
+              </p>
+            </div>
+          </div>
+        </section>
+      </section>
+
+      <section>
+        <section>
+          <h2>Our starting point:</h2>
+          <div class="cols">
+            <div class="card compact">
+              <span class="label">2023 AIMD scalar model</span>
+              <p>The study <a class="cite-link" href="#/partial-resetting-bibliography">van der Hofstad et al.
+                  (2023)</a> looked at exit-time identities for the scalar model.</p>
+              <p>The model is specified by one triplet $(c,\lambda,p)$:</p>
+              <ul>
+                <li>deterministic growth at rate $1/c$;</li>
+                <li>Poisson jumps with rate $\lambda$;</li>
+                <li>mult. decrease factor $p\in(0,1)$.</li>
+              </ul>
+              <p>that determines the dynamics of the $X$ process:</p>
+              <p class="eq small">\begin{align*}
+                dX_t &= dt /c ,\qquad T_n \le t \lt T_{n+1},\\
+                X(T_n) &= p X(T_n-),\\
+                T_{n+1}-T_n &\sim \Exp(\lambda).
+                \end{align*}</p>
+            </div>
+            <div class="theorem-box compact fragment">
+              <span class="label">This talk - <strong>Markovian modulation</strong></span>
+              <p>A finite-state Markov environment $J$ modulates all local parameters.</p>
+              <p class="eq small">\[
+                (c_i,\lambda_i,p_i),\qquad \mQ=(q_{ij}),\qquad i,j\in\{1,\dots,m\}.
+                \]</p>
+              <p>The scalar transforms of the exit-times become <strong>matrix-valued</strong> transforms, indexed by
+                the starting and ending environment regime.</p>
+              <p class="eq small">\begin{align*}
+                \{J(T_n)=i\} &\implies \{J(T_{n+1})=j\} \text{ with prob. } q_{ij},\\
+                dX_t &= dt /c_i ,\ J(t)=i \qquad T_n \le t \lt T_{n+1} \\
+                X(T_n) &= p_i X(T_n-),\\
+                T_{n+1}-T_n &\sim \Exp(\lambda_i).
+                \end{align*}</p>
+            </div>
+          </div>
+          <div class="callout fragment"><strong>Note:</strong> the skip-free/first-step strategy survives, but scalar
+            $q$-series
+            are replaced by non-commutative regime-indexed matrix series.</div>
+          <aside class="notes">
+            Keep this slide conceptual. It positions the new work as a controlled extension, not a different problem.
+          </aside>
+        </section>
+
+        <section>
+          <h2>Markov modulated AIMD simulating one sample path</h2>
+          <div id="plot" class="figure-card">
+          </div>
+          <div class="sim-controls">
+            <label class="sim-control">
+              <input id="hide-future-times" type="checkbox" checked />
+              Hide future times
+            </label>
+            <button id="play-simulation" class="sim-play-button" type="button" aria-label="Play simulation"
+              title="Play simulation">
+              <span class="sim-play-icon" aria-hidden="true"></span>
+            </button>
+          </div>
+        </section>
+
+        <!--
+        <section>
+          <h2>Debug</h2>
+          <div id="svg-debug" class="figure-card"></div>
+        </section>
+        -->
+
+        <section>
+          <h2>Markov modulated AIMD sample path</h2>
+          <div class="figure-card">
+            <img class="figure" src="assets/MMaimd_example.svg"
+              alt="Example trajectory of a Markov-modulated AIMD process" />
+          </div>
+        </section>
+      </section>
+
+      <section>
+        <h2>Objects of interest</h2>
+        <div class="definition-box">
+          <p>For fixed levels $0\le b\lt a$, define</p>
+          <p class="eq">\[
+            \tau_a^\up=\inf\{t\ge0:X_t\ge a\},\qquad
+            \tau_b^\down=\inf\{t\ge0:X_t\le b\}.
+            \]</p>
+        </div>
+        <div class="cols">
+          <div class="card compact fragment" data-fragment-index="2">
+            <h3>Upward one-sided transform <span class="label">$\mZ(x\up a)$</span></h3>
+            <p class="eq small">\[
+              \ Z_{ij}(w,x\up a)=\E_{x,i}\!\big[\e^{-w\tau_a^\up};\,J(\tau_a^\up)=j\big].
+              \]</p>
+          </div>
+          <div class="card compact fragment" data-fragment-index="3">
+            <h3>Two-sided upward transform <span class="label">$\mL(x\up_b^a)$</span></h3>
+            <p class="eq small">\[
+              L_{ij}(w,x\up_b^a)=\E_{x,i}\!\big[\e^{-w\tau_a^\up};\,\tau_a^\up\lt\tau_b^\down,\,J(\tau_a^\up)=j\big].
+              \]</p>
+          </div>
+        </div>
+        <div class="callout small fragment" data-fragment-index="2">Throughout, matrix products encode conditioning on
+          the regime reached at an
+          intermediate level.</div>
+        <aside class="notes">
+          Explain that the j-index at exit is not decoration: it is what makes the Markov modulation tractable by matrix
+          multiplication.
+        </aside>
+      </section>
+
+      <section>
+        <h2>A closer look at the introduction of the Markovian environment</h2>
+        <div class="cols-45-55">
+          <div class="figure-card">
+            <img class="figure" src="assets/state_chain.svg" alt="Finite-state modulating chain" />
+          </div>
+          <div class="compact">
+            <p>Starting after a jump at time $t_n$ at level $x_n$ and state $i_n$, the level just after a new jump at
+              time $t_{n+1}$ is</p>
+            <p class="eq">\[
+              x_{n+1}=p_{i_n}\left(x_n+\frac{t_{n+1}-t_n}{c_{i_n}}\right).
+              \]</p>
+            <p>The next state $i_{n+1}$ is selected randomly according to the distribution given by the $i$-th row of
+              <thead></thead> transition matrix $\mQ$.
+            </p>
+            <p>Hence a first-step equation mixes:</p>
+            <ul>
+              <li>state-dependent linear growth $t\mapsto x+t/c_i$;</li>
+              <li>state-dependent rescaling $x\mapsto x/p_i$;</li>
+              <li>multiplication by selectors $\mE_i$;</li>
+              <li>matrix products with $\mQ$.</li>
+            </ul>
+          </div>
+        </div>
+        <aside class="notes">
+          The non-commutativity is the main technical price.
+          In scalar AIMD one iterates a one-dimensional functional equation;
+          here each branch carries an index sequence.
+        </aside>
+      </section>
+
+      <section>
+        <h2>Some notation</h2>
+        <div class="method-box compact">
+          <p>Let $\vecz=(z_i)$ and $\vecgamma=(\gamma_i)$, with:</p>
+          <p class="eq">\[
+            z_i=c_i(\lambda_i+w),\qquad
+            \gamma_i=\frac{c_i\lambda_i}{p_i}.
+            \]</p>
+        </div>
+        <div class="cols">
+          <div class="definition-box compact">
+            <p>Diagonal and selector matrices:</p>
+            <p class="eq">\[
+              \mExp(\vecv)=\diag(\e^{v_i}),\qquad
+              \mDelta(\vecv)=\diag(v_i),
+              \]</p>
+            <p class="eq">\[
+              \mE_i=(\delta_{ik}\delta_{i\ell})_{k\ell}.
+              \]</p>
+          </div>
+          <div class="definition-box compact">
+            <p>Some useful matrices:</p>
+            <p class="eq margin-bottom">\[
+              \mA(s)=\mDelta\!\left(\frac{\vecgamma}{\vecz-s}\right),\qquad \mB=-\mDelta(\vecgamma)^{-1}.
+              \]</p>
+          </div>
+        </div>
+        <aside class="notes">
+          This slide prevents formula overload later. Make clear that divisions are componentwise.
+        </aside>
+      </section>
+
+      <section>
+        <h2>Upward one-sided exit: the skip-free factorization</h2>
+        <div class="theorem-box compact">
+          <p>For $0\lt x\lt a$, upward passage is continuous, so the process must cross $x$ before $a$.</p>
+          <p class="eq">\[
+            \mZ(0\up a)=\mZ(0\up x)\,\mZ(x\up a).
+            \]</p>
+          <p>Consequently,</p>
+          <p class="eq">\[
+            \boxed{\;\mZ(x\up a)=\mZ(0\up x)^{-1}\mZ(0\up a)\;}
+            \]</p>
+          <p>and we are left with computing \(\mZ(0\up x)\) for any \(x\ge0\).</p>
+        </div>
+        <div class="callout small fragment" data-fragment-index="2">The proof is the strong Markov property at
+          $\tau_x^\up$, plus local invertibility of
+          the matrix evolution.</div>
+        <div class="method-box compact fragment" data-fragment-index="2">
+          <h3>Main ingredient</h3>
+          <p class="eq small">\[
+            \tau_a^\up(0,J(0)) \disteq \tau_x^\up(0,J(0)) + \tau_a^\up(x,J(\tau_x^\up(0,J(0))).
+            \]</p>
+        </div>
+        <aside class="notes">
+          This is the cleanest result. It is also the bridge from scalar scale functions to matrix scale matrices.
+        </aside>
+      </section>
+
+      <section>
+        <h2>Computing the upward scale matrix</h2>
+        <p>First-step analysis at the first jump gives</p>
+        <div class="theorem-box math-small">
+          \[
+          \mId=\mExp(-a\vecz) \mZ(0\up a)^{-1}
+          +\mDelta(\vecgamma)\int_0^\infty
+          \mDelta(x\le a\vecp) \mExp(-(\vecz/\vecp)x) \mQ\,\mZ(0\up a)^{-1}\,dx.
+          \]
+        </div>
+        <div class="flow">
+          <div class="node">split at first jump</div>
+          <div class="arrow">$\Rightarrow$</div>
+          <div class="node">Volterra-type matrix equation</div>
+          <div class="arrow">$\Rightarrow$</div>
+          <div class="node">Laplace functional equation</div>
+        </div>
+        <p class="small muted">Here $(x\le a\vecp)_i = \one\{x \le a p_i\}$.</p>
+        <aside class="notes">
+          The integral equation is the core computational object. Explain the two terms: no jump before hitting a, or
+          one jump and restart from p_i times the pre-jump level.
+        </aside>
+      </section>
+
+      <section>
+        <h2>Upward one-sided exit: Laplace-domain solution</h2>
+        <p>Let $\tmU(s)=\int_0^\infty \e^{-sa} \mZ(0\up a)^{-1}\,da$. Then</p>
+        <div class="theorem-box math-small">
+          \[
+          \tmU(s)=\mA(s)\mB+\mA(s)\sum_{i=1}^m \mE_i \mQ\,\tmU(s/p_i).
+          \]
+        </div>
+        <p>Iterating this equation yields</p>
+        <div class="method-box math-small">
+          \[
+          \boxed{\;\tmU(s)=\mA(s)\mD(s)\mB\;}
+          \]
+          \[
+          \mD(s)=\mId+\sum_{n\ge1}\sum_{i_1,\ldots,i_n}
+          \mE_{i_1}\mQ\mA(s/p_{i_1})\cdots
+          \mE_{i_n}\mQ\mA\!\left(\frac{s}{p_{i_1}\cdots p_{i_n}}\right).
+          \]
+        </div>
+        <p class="small muted">The series converges because repeated multiplications by $p_i\lt 1$ push the residuals
+          quickly towards $0$.</p>
+        <aside class="notes">
+          The important idea is not to display every index but to tell the story: each word i_1...i_n is a possible
+          sequence of post-jump regimes.
+        </aside>
+      </section>
+
+      <section>
+        <h2>Comparison with the scalar benchmark</h2>
+        <div class="cols">
+          <div class="card compact">
+            <span class="label">Scalar AIMD</span>
+            <p class="eq small">\[
+              Z^\up(w;x,a)=\frac{Z^\up(w;0,a)}{Z^\up(w;0,x)}
+              \]</p>
+            <p class="eq small">\[
+              Z^\up(w;0,x)=
+              \left[\sum_{k=0}^{\infty}
+              \frac{(x/(w+\lambda))^k}{k!}\,
+              (\lambda/(w+\lambda);p)_k\right]^{-1}.
+              \]</p>
+          </div>
+          <div class="card compact">
+            <span class="label">Markov-modulated AIMD</span>
+            <p>Division is replaced by matrix inversion.</p>
+            <p>A scalar $q$-series is replaced by the non-commutative series $\mD(s)$.</p>
+            <p>The matrices $\mE_i\mQ$ trace the regimes selected at each jump.</p>
+          </div>
+        </div>
+        <div class="callout small">For $m=1$, the matrix formula collapses to the scalar recursion from the previous
+          paper.</div>
+        <p class="small muted">From $q$-calculus:
+          $(x;q)_n = (1-x)(1-xq)(1-xq^2)\cdots(1-xq^{n-1})$</p>
+        <aside class="notes">
+          This slide is meant to reassure the audience that the new formula has the correct scalar limit.
+        </aside>
+      </section>
+
+      <section>
+        <h2>Downward one-sided exit</h2>
+        <p>For $x>b$, first-step analysis gives a renewal equation in the opposite direction:</p>
+        <div class="theorem-box math-small">
+          \[
+          Z^{\down}_{ij}(w,x,b)=
+          \sum_k q_{ik}\gamma_i\e^{z_ix}
+          \int_{p_ix}^{\infty} Z^{\down}_{kj}(w,y,b)\,
+          \e^{-(z_i/p_i)y}\,dy,
+          \qquad \mZ^{\down}(x,b)=\mId\;\text{ for }x\le b.
+          \]
+        </div>
+        <p>With $\tmZ^{\down}(s)=\int_0^\infty\e^{-sx} \mZ^{\down}(x,b)\,dx$,</p>
+        <div class="method-box math-small">
+          \[
+          \tmZ^{\down}(s)=\sum_h \mA(s) \mE_h \mQ
+          \left(\tmZ^{\down}(s/p_h)-\tmZ^{\down}(z_h/p_h)\right).
+          \]
+          \[
+          \tmZ^{\down}(s)=\mA(s)\mD(s)\mH,
+          \qquad
+          \mH=-\sum_h \mE_h\mQ\tmZ^{\down}(z_h/p_h).
+          \]
+        </div>
+        <p class="small muted">The matrix $\mH$ is then recovered by solving a system of equations at the limiting
+          arguments obtained for $s \to z_h/p_h$, $h\in E$.</p>
+        <aside class="notes">
+          Present H as the finite boundary/normalization matrix. Do not spend time on its closure unless asked; the main
+          point is that the same D appears.
+        </aside>
+      </section>
+
+      <section>
+        <section>
+          <h2>Two-sided upward exit</h2>
+          <p>Let $\mL(x\up_b^a)$ denote the transform of the upward exit time before downward exit. <br> We use a
+            constructive recursion to compute it.</p>
+          <div class="theorem-box math-small">
+            <p>Assuming $\mL(y\up_b^a)$ known for all $y\lt a$, with $\rho\lt\min_i p_i$, <br />
+              then $\mL(x\up_b^{a/\rho})$ is
+              obtained for $x=a$ as</p>
+            \[
+            \mL(a\up_b^{a/\rho})=(I-\mH(a))^{-1}\mExp(-(a/\rho-a)\vecz)\mL(a\up_b^a),
+            \]
+            <p>and for $x \lt a/\rho$ as</p>
+            \[
+            \mL(x\up_b^{a/\rho})=\mExp(-(a/\rho-x)\vecz)+\mH(x)\mL(a\up_b^{a/\rho}).
+            \]
+          </div>
+          <p class="eq math-xsmall">The matrix $\mH(x)$ with components
+            \(H_{ij}(x)=\gamma_i\e^{z_ix/p_i}
+            \int_{p_ix}^{p_i a/\rho}\sum_h q_{ih}L_{hj}(w,y\up_b^a)\e^{-(z_i/p_i)y}\,dy
+            \) can be explicitly computed.</p>
+          <aside class="notes">
+            Explain that rho is a step-size parameter, not the vector p. It is selected to ensure every post-jump level
+            falls into a region already computed.
+          </aside>
+        </section>
+        <section>
+          <h2>Two-sided upward exit &mdash; starting interval \([b,b/p)\)</h2>
+          <div class="theorem-box math-small">
+            <p> We have that, for any \(x\in[b,b/p)\), where \(p=\max_i p_i\),the following identities hold: </p>
+            \begin{align*}
+            %\mL\!\left(b\!\up_b^x\right) &= \mExp\!\bigl(-(x-b)\vecz\bigr),\\
+            \mL\!\left(x\!\up_b^{b/p}\right)& =\mExp\!\bigl(-(b/p-x)\vecp \vecgamma\bigr).
+            \end{align*}
+          </div>
+          <div class="proof-box math-xsmall">
+            <!--
+            <p>
+              <strong>Proof.</strong>
+              Assume that \((X(0),J(0))=(b,i)\). Since \(xp_i&lt;b\), we have
+              \[
+              \{\tau_{\uparrow x}&lt;\tau_{\downarrow b}\}
+              =
+              \{c_iT&gt;(x-b)\}.
+              \]
+              Therefore,
+              \[
+              L_{ij}\!\left(b\up_b^x\right)
+              =
+              \delta_{ij}\P_{x,i}(\tau_{\uparrow x}&lt;\tau_{\downarrow b})
+              =
+              \delta_{ij}\P_{x,i}(c_iT\ge x-b)
+              =
+              \delta_{ij}\exp\!\left\{-\frac{z_i}{p_i}(x-b)\right\}.
+              \]
+            </p>
+            -->
+
+            <p>
+              <strong>Proof.</strong><br />
+              Assume that \((X(0),J(0))=(x,i)\), then since \(y p_i&lt;b\), for all \(y\in[x,b/p)\), we have
+              \[
+              \{\tau_{\uparrow b/p}&lt;\tau_{\downarrow b}\}
+              =
+              \{T\ge c_i(b/p-x)\},
+              \]
+              and
+              \[
+              L_{ij}\!\left(x\up_b^{b/p}\right)
+              =
+              \delta_{ij}\P_{x,i}(\tau_{\uparrow {b/p}}&lt;\tau_{\downarrow b})
+              =
+              \delta_{ij}\P_{x,i}(T\ge c_i(b/p-x))
+              =
+              \delta_{ij}\exp\!\left\{- \lambda_i c_i(b/p-x)\right\}.
+              \]
+            </p>
+          </div>
+
+          <aside class="notes">
+            This proposition provides the initialization step for the upward-exit recursion.
+            On the interval \([b,b/p)\), no regime switch can occur before exiting,
+            so the transform reduces to a simple exponential survival probability.
+          </aside>
+        </section>
+      </section>
+
+      <section>
+        <h2>Two-sided downward exit</h2>
+        <p>Define</p>
+        <p class="eq small">\[
+          L^{\down}_{ij}(w,x\down_b^a)=\E_{x,i}\big[\e^{-w\tau_b^\down};\tau_b^\down\lt\tau_a^\up,\,J(\tau_b^\down)=j\big].
+          \]</p>
+        <div class="theorem-box">
+          <p class="eq">\[
+            \boxed{\;L^{\down}(w,x\down_b^a)=Z^{\down}(w,x,b)-L(w,x\up_b^a)Z^{\down}(w,a,b)\;}
+            \]</p>
+        </div>
+        <div class="callout small">Interpretation: to all paths that go to $b$, subtract paths that first go up to $a$
+          and only then later hit $b$.
+        </div>
+        <aside class="notes">
+          This is an excellent place to pause: once upward two-sided and downward one-sided are known, downward
+          two-sided is automatic.
+        </aside>
+      </section>
+
+      <section>
+        <h2>Reflected processes at its running infimum</h2>
+        <div class="cols">
+          <div class="card compact">
+            <span class="label">2023 AIMD scalar model</span>
+            <p>They looked at the <em>upward exit time</em> for the process
+              \[ X_t^{-} = \inf_{s \le t} X_s \wedge X_0 ,\]
+              that correspond to the free process reflected at it's minimum.
+            </p>
+            <p>The used technique is to show that the processes
+              \[ e^{-w\tau_{a,b}(x)\wedge t}
+              F\bigl(w,X_{\tau_{a,b}(x)\wedge t}\up_b^a\bigr)
+              -\int_{0}^{\tau_{a,b}(x)\wedge t} \mathcal{A}^{\dagger}
+              F\bigl(w; X_s\up_b^a\bigr)\, ds \]
+              is a local martingale, where
+              \[F(w,x\up_b^a)=Z(w,x\down_b)+L(w,x\up_b^a)\]
+            </p>
+          </div>
+          <div class="rows">
+            <div class="error-box compact">
+              <p>Defining a similar object for the modulated version of the reflected process,</p>
+              <p class="eq">\[
+                \mF(x\up_b^a) \approx \mZ(x\down_b)+\mL(x\up_b^a)\]</p>
+              <p>does not work.</p>
+            </div>
+            <div class="method-box compact fragment">
+              <p>The natural Markov modulated extension of \(L(w,x\up_b^a)\) is
+                \[\mL(x\up_b^{\veca})\]
+                where \(\veca\) is a vector.</p>
+            </div>
+          </div>
+        </div>
+        <aside class="notes">
+          This is a bridge slide. It shows that the fixed-barrier identities are not isolated; they are the alphabet for
+          reflected problems.
+        </aside>
+      </section>
+
+      <section>
+        <h2>Working with state-dependent upper barriers</h2>
+        <div class="error-box compact">
+          <p class="eq small">In general \[
+            \tau_{\veca}^\up(0,J(0)) \not\disteq \tau_x^\up(0,J(0)) + \tau_{\veca}^\up(x,J(\tau_x^\up(0,J(0))),\]
+            that means
+            \[\mZ(0\up\veca)\not=\mZ(0\up x)\,\mZ(x\up\veca). \]</p>
+        </div>
+        <div class="method-box compact fragment">
+          <p class="eq small">What instead works is \[
+            \tau_{\veca}^\up(0,J(0)) \disteq \tau_{x\wedge\veca}^\up(0,J(0)) + \tau_{\veca}^\up(x,J(\tau_{x\wedge\veca}^\up(0,J(0)))),\]
+            and
+            \[\mZ(0\up\veca) =\mZ(0\up x\wedge\veca)\,\mZ(x\up\veca). \]</p>
+        </div>
+      </section>
+
+      <section>
+        <h2>Factorization over generated levels</h2>
+        <div class="theorem-box compact">
+          <p>For $x\le\ell$,</p>
+          <p class="eq">\[
+            \mZ(x \up \veca) = \mZ(x \up \veca\wedge\ell) \, \mZ(\ell \up \veca).
+            \]</p>
+        </div>
+        <div class="cols">
+          <div class="card compact">
+            <span class="label">Initialization</span>
+            <p>Let $\wedge \veca=\min_i a_i$. For $x\lt\wedge \veca$,</p>
+            <p class="eq small">\[
+              \mZ(x\up \veca\wedge(\wedge \veca))=\mZ(x\up \wedge \veca),
+              \]</p>
+            <p>which is the fixed-barrier problem <br />already solved.</p>
+          </div>
+          <div class="card compact">
+            <span class="label">Iteration</span>
+            <p>At each new level, solve only for the active regimes.</p>
+            <p>Inactive regimes contribute with an identity matrix.</p>
+          </div>
+        </div>
+        <aside class="notes">
+          This is the same conceptual logic as the scalar two-sided recursion, but now levels are generated by the
+          vector barrier.
+        </aside>
+      </section>
+
+      <section>
+        <h2>Extension step for modulated barriers</h2>
+        <p>Assume $\mZ(y\up \veca\wedge\ell)$ is known for $y\lt\ell$. Choose $\rho$ so that $p_i x\lt\ell$ for
+          $x\in[\ell,\ell/\rho)$.</p>
+        <div class="theorem-box math-small">
+          \[
+          \mZ(\ell\up \veca\wedge(\ell/\rho))=
+          (\mId-\mE_k \mH(\ell))^{-1}\left[\mId+\mE_k\left(\mExp(-(
+          \ell/\rho-\ell)\vecz)-\mId\right)\right],
+          \]
+          \[
+          \mZ(x\up \veca\wedge(\ell/\rho))=
+          \mE_k\mExp(-(
+          \ell/\rho-x)\vecz)+\mH(x)\mZ(\ell\up \veca\wedge(\ell/\rho))+(\mId-\mE_k).
+          \]
+        </div>
+        <p class="eq math-xsmall">\[
+          H_{ij}(x)=\gamma_i\e^{z_ix/p_i}\int_{p_ix}^{p_i\ell/\rho}
+          \sum_h q_{ih} Z_{hj}(w,y\up \veca\wedge\ell)\e^{-(z_i/p_i)y}\,dy.
+          \]</p>
+        <aside class="notes">
+          This is the most technical slide. Say it slowly: known lower region, jump lands there, integrate known
+          transform, solve a finite linear system at the boundary.
+        </aside>
+      </section>
+
+      <!--
+      <section>
+        <h2>Computational recipe</h2>
+        <ol class="compact">
+          <li>Compute the fixed-barrier upward scale matrix $\mZ(x\up \ell)$ for $\ell=\wedge \veca$.</li>
+          <li>Order the generated levels $\ell_k$.</li>
+          <li>On each interval, choose a step $\rho$ so every post-jump value lies in the known region.</li>
+          <li>Evaluate the matrix integral $H(x)$ from already-computed transforms.</li>
+          <li>Solve one $m\times m$ linear system at the left endpoint and propagate by the explicit formula.</li>
+        </ol>
+        <aside class="notes">
+          The small joke at the end can be used or skipped. The point is that the method is first-step and transparent.
+        </aside>
+      </section>
+      -->
+
+      <!--
+      <section>
+        <h2>What is gained?</h2>
+        <table class="table-mini">
+          <thead>
+            <tr>
+              <th>Feature</th>
+              <th>Scalar AIMD</th>
+              <th>Markov-modulated AIMD</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Growth</td>
+              <td>single slope</td>
+              <td>state-dependent slope $1/c_i$</td>
+            </tr>
+            <tr>
+              <td>Jump clock</td>
+              <td>Poisson rate $\lambda$</td>
+              <td>Markov-modulated rate $\lambda_i$</td>
+            </tr>
+            <tr>
+              <td>Decrease</td>
+              <td>fixed factor $p$</td>
+              <td>factor $p_i$ selected by the current regime</td>
+            </tr>
+            <tr>
+              <td>Transforms</td>
+              <td>scalar scale functions</td>
+              <td>matrix scale functions joint with exit state</td>
+            </tr>
+            <tr>
+              <td>Recursions</td>
+              <td>commutative $q$-series</td>
+              <td>non-commutative products indexed by regime words</td>
+            </tr>
+            <tr>
+              <td>Barriers</td>
+              <td>fixed levels</td>
+              <td>fixed levels and regime-dependent thresholds</td>
+            </tr>
+          </tbody>
+        </table>
+        <aside class="notes">
+          This is a synthesis slide for the audience. It also helps in case time is short.
+        </aside>
+      </section>
+      -->
+
+      <section>
+        <h2>Take-home points</h2>
+        <div class="three-cols">
+          <div class="theorem-box compact">
+            <span class="label">1</span>
+            <p>Upward skip-free motion still gives clean multiplicative identities.</p>
+          </div>
+          <div class="method-box compact">
+            <span class="label">2</span>
+            <p>First-step analysis yields matrix-functional equations with rescaling $s\mapsto s/p_i$.</p>
+          </div>
+          <div class="definition-box compact">
+            <span class="label">3</span>
+            <p>The scalar scale-function paradigm becomes a matrix scale-function paradigm.</p>
+          </div>
+        </div>
+        <aside class="notes">
+          Close with a balanced message. The formulas are involved, but the organizing idea is simple and robust.
+        </aside>
+      </section>
+
+      <section>
+        <h2>Questions</h2>
+        <div class="center" style="margin-top: 1.4em;">
+          <p style="font-size: 1.2em;"><strong>Thank you.</strong></p>
+          <p class="muted">Bernardo D'Auria, University of Padova</p>
+          <p class="muted small">Joint work with Zbigniew Palmowski</p>
+        </div>
+      </section>
+
+      <section id="partial-resetting-bibliography">
+        <section>
+          <h2 class="backup">Selected references</h2>
+          <ul class="refs refs-primary">
+            <li>R. van der Hofstad, S. Kapodistria, Z. Palmowski, S. Shneer, <em>Unified approach for solving exit
+                problems for additive-increase and multiplicative-decrease processes</em>, J. Appl. Probab. 60 (2023),
+              85-105.</li>
+            <li>B. D'Auria and Z. Palmowski, <em>Exit Problems for Additive-Increase and Multiplicative-Decrease
+                Markov-Modulated Processes</em>, working draft.</li>
+            <li>Z. Palmowski, <em>Stationary states and exit times for Levy processes with partial resetting</em>,
+              Eurandom slides; exit-problem part from slide 36.</li>
+          </ul>
+          <div class="refs-stack">
+            <div class="card compact">
+              <h3>Search, restart and algorithms</h3>
+              <ul>
+                <li>Evans, Majumdar, Schehr (2020). <em>Stochastic resetting and applications</em>. J. Phys. A 53,
+                  193001.</li>
+                <li>Gupta, Jayannavar (2022). <em>Stochastic resetting: A (very) brief review</em>. Front. Phys. 10,
+                  789097.</li>
+                <li>B&eacute;nichou, Loverdo, Voituriez (2011). <em>Intermittent search strategies</em>. Rev. Mod. Phys.
+                  83, 81.</li>
+                <li>Avrachenkov, Piunovskiy, Zhang (2013). <em>Markov processes with restart</em>. J. Appl. Probab. 50,
+                  960-968.</li>
+                <li>Borovkov, Vere-Jones (2000). <em>Explicit formulae for stationary distributions of stress release
+                    processes</em>. J. Appl. Probab. 37, 315-321.</li>
+              </ul>
+            </div>
+            <div class="card compact fragment">
+              <h3>Queueing, clearing and growth-collapse</h3>
+              <ul>
+                <li>Artalejo, Economou, L&oacute;pez-Herrero (2006). <em>Evaluating growth measures in populations
+                    subject to binomial and geometric catastrophes</em>. Math. Biosci. Eng. 4, 573-594.</li>
+                <li>Kella, Perry, Stadje (2003). <em>A stochastic clearing model with a Brownian and a compound Poisson
+                    component</em>. Probab. Eng. Inform. Sci. 17.</li>
+                <li>Boxma, Perry, Stadje, Zacks (2006). <em>A Markovian growth-collapse model</em>. Adv. Appl. Probab.
+                  38, 221-243.</li>
+                <li>L&ouml;pker, Stadje (2011). <em>Hitting times and the running maximum of Markovian growth-collapse
+                    processes</em>. J. Appl. Probab. 48, 295-312.</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <section>
+          <h2 class="backup">Selected references</h2>
+          <div class="refs-stack">
+            <div class="card compact">
+              <h3>Biology, chemistry and ecology</h3>
+              <ul>
+                <li>Gr&uuml;nwald, Singer (2010). <em>In vivo imaging of labelled endogenous actin mRNA during
+                    nucleocytoplasmic transport</em>. Nature 467.</li>
+                <li>Roldan, Lisica, Sanchez-Taltavull, Grill (2016). <em>Stochastic resetting in backtrack recovery by
+                    RNA polymerases</em>. Phys. Rev. E 93, 062411.</li>
+                <li>Berezhkovskii, Szabo, Urbakh, Kolomeisky (2016). <em>Dependence of the enzymatic velocity on the
+                    substrate dissociation rate</em>. J. Phys. Chem. B 121, 3437.</li>
+                <li>Robin, Reuveni, Urbakh (2018). <em>Single-molecule theory of enzymatic inhibition</em>. Nat. Commun.
+                  9, 779.</li>
+                <li>Robin, Hadany, Urbakh (2019). <em>Random search with resetting as a strategy for optimal
+                    pollination</em>. Phys. Rev. E 99, 052119.</li>
+                <li>Reuveni, Urbakh, Klafter (2014). <em>Role of substrate unbinding in Michaelis-Menten enzymatic
+                    reactions</em>. PNAS 111, 4391.</li>
+              </ul>
+            </div>
+            <div class="card compact fragment">
+              <h3>Physics, environment and risk</h3>
+              <ul>
+                <li>Fuchs, Goldt, Seifert (2016). <em>Stochastic thermodynamics of resetting</em>. Europhys. Lett. 113,
+                  60009.</li>
+                <li>Mukherjee, Sengupta, Majumdar (2018). <em>Quantum dynamics with stochastic reset</em>. Phys. Rev. B
+                  98, 104309.</li>
+                <li>Dahlenburg, Chechkin, Schumer, Metzler (2021). <em>Stochastic resetting by a random amplitude</em>.
+                  Phys. Rev. E 103, 052123.</li>
+                <li>Mau, Feng, Porporato (2014). <em>Multiplicative jump processes and applications to leaching of salt
+                    and contaminants in the soil</em>. Phys. Rev. E 90.</li>
+                <li>Suweis, Rinaldo, van der Zee, Daly, Maritan, Porporato (2010). <em>Stochastic modeling of soil
+                    salinity</em>. Geophys. Res. Lett. 37.</li>
+                <li>Akahori, Constantinescu, Pham (2022). <em>An application of risk theory to mortgage lending</em>.
+                  Scand. Actuar. J. 5, 447-469.</li>
+                <li>Sornette (2017). <em>Why stock markets crash: critical events in complex financial systems</em>.
+                  Princeton Univ. Press.</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+      </section>
+
+      <section>
+        <h2 class="backup">Boundary conventions</h2>
+        <div class="cols">
+          <div class="card compact">
+            <p>Upward crossing is by creeping:</p>
+            <p class="eq">\[
+              X(\tau_a^\up)=a.
+              \]</p>
+          </div>
+          <div class="card compact">
+            <p>Downward crossing is by a jump:</p>
+            <p class="eq">\[
+              X(\tau_b^\down)\le b.
+              \]</p>
+          </div>
+        </div>
+        <p class="callout small">This asymmetry is why upward identities factor cleanly, while downward identities
+          require integral renewal equations.</p>
+      </section>
+
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@5/dist/reveal.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@5/plugin/math/math.js"></script>
+  <!-- Your simulator -->
+
+  <script src="assets/AiMd_simulator.js"></script>
+  <script src="assets/slides.js"></script>
+</body>
+
+</html>

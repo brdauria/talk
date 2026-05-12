@@ -1,0 +1,132 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="950" height="760" viewBox="0 0 950 760">
+  <defs>
+    <marker id="arrow" markerWidth="7" markerHeight="7" refX="6.3" refY="3.5"
+            orient="auto" markerUnits="strokeWidth">
+      <path d="M 0 0 L 7 3.5 L 0 7 z" fill="#2f2f2f"/>
+    </marker>
+
+    <style>
+      .node {
+        stroke-width: 2.2;
+      }
+
+      .arrow {
+        stroke: #2f2f2f;
+        stroke-width: 2.2;
+        fill: none;
+        marker-end: url(#arrow);
+        stroke-linecap: round;
+      }
+
+      .label {
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        font-style: italic;
+        font-size: 28px;
+        fill: #2f2f2f;
+      }
+
+      .state {
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        font-size: 42px;
+        font-weight: 500;
+      }
+
+      .inside {
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        font-style: italic;
+        font-size: 26px;
+      }
+    </style>
+  </defs>
+
+<!-- Background -->
+<rect width="100%" height="100%" fill="#ffffff"/>
+
+<!-- Nodes  -->
+<circle class="node" cx="475" cy="165" r="105"
+        fill="#edf5ff" stroke="#2457c5" stroke-width="3"/>
+
+<circle class="node" cx="230" cy="565" r="105"
+        fill="#e9fbf3" stroke="#117963" stroke-width="3"/>
+
+<circle class="node" cx="720" cy="565" r="105"
+        fill="#fffbeb" stroke="#b45309" stroke-width="3"/>
+
+  <!-- Node 1 -->
+  <text class="state" x="475" y="165" text-anchor="middle"  fill="#1e3a8a">1</text>
+  <text class="inside" x="475" y="203" text-anchor="middle">
+    c<tspan baseline-shift="sub" font-size="17">1</tspan>,
+    λ<tspan baseline-shift="sub" font-size="17">1</tspan>,
+    p<tspan baseline-shift="sub" font-size="17">1</tspan>
+  </text>
+
+  <!-- Node 2 -->
+  <text class="state" x="230" y="565" text-anchor="middle" fill="#0a5a49">2</text>
+  <text class="inside" x="230" y="603" text-anchor="middle">
+    c<tspan baseline-shift="sub" font-size="17">2</tspan>,
+    λ<tspan baseline-shift="sub" font-size="17">2</tspan>,
+    p<tspan baseline-shift="sub" font-size="17">2</tspan>
+  </text>
+
+  <!-- Node 3 -->
+  <text class="state" x="720" y="565" text-anchor="middle" fill="#78350f">3</text>
+  <text class="inside" x="720" y="603" text-anchor="middle">
+    c<tspan baseline-shift="sub" font-size="17">3</tspan>,
+    λ<tspan baseline-shift="sub" font-size="17">3</tspan>,
+    p<tspan baseline-shift="sub" font-size="17">3</tspan>
+  </text>
+
+  <!-- 1 -> 2 -->
+  <path class="arrow" d="M 409 247 L 285 475"/>
+  <text class="label" x="290" y="370">
+    q<tspan baseline-shift="sub" font-size="18">12</tspan>
+  </text>
+
+  <!-- 2 -> 1 -->
+  <path class="arrow" d="M 312 499 L 436 270"/>
+  <text class="label" x="365" y="435">
+    q<tspan baseline-shift="sub" font-size="18">21</tspan>
+  </text>
+
+  <!-- 1 -> 3 -->
+  <path class="arrow" d="M 541 247 L 665 475"/>
+  <text class="label" x="615" y="370">
+    q<tspan baseline-shift="sub" font-size="18">13</tspan>
+  </text>
+
+  <!-- 3 -> 1 -->
+  <path class="arrow" d="M 638 499 L 514 270"/>
+  <text class="label" x="555" y="435">
+    q<tspan baseline-shift="sub" font-size="18">31</tspan>
+  </text>
+
+  <!-- 2 -> 3 -->
+  <path class="arrow" d="M 335 545 L 615 545"/>
+  <text class="label" x="475" y="518" text-anchor="middle">
+    q<tspan baseline-shift="sub" font-size="18">23</tspan>
+  </text>
+
+  <!-- 3 -> 2 -->
+  <path class="arrow" d="M 615 585 L 335 585"/>
+  <text class="label" x="475" y="618" text-anchor="middle">
+    q<tspan baseline-shift="sub" font-size="18">32</tspan>
+  </text>
+
+  <!-- Self-loop 1 -->
+  <path class="arrow" d="M 443 65 C 415 15, 535 15, 507 65"/>
+  <text class="label" x="545" y="62">
+    q<tspan baseline-shift="sub" font-size="18">11</tspan>
+  </text>
+
+  <!-- Self-loop 2 -->
+  <path class="arrow" d="M 128 538 C 58 500, 58 630, 128 592"/>
+  <text class="label" x="67" y="624">
+    q<tspan baseline-shift="sub" font-size="18">22</tspan>
+  </text>
+
+  <!-- Self-loop 3 -->
+  <path class="arrow" d="M 822 538 C 892 500, 892 630, 822 592"/>
+  <text class="label" x="847" y="624">
+    q<tspan baseline-shift="sub" font-size="18">33</tspan>
+  </text>
+</svg>

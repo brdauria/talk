@@ -1,0 +1,118 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 50 1400 750" width="1400" height="650">
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L8,3 L0,6 Z" fill="#111"/>
+    </marker>
+    <style>
+      .axis{stroke:#111;stroke-width:2.5;marker-end:url(#arrow)}
+      .curve{stroke:#0646d8;stroke-width:4;fill:none}
+      .drop{stroke:#0646d8;stroke-width:3;stroke-dasharray:8 8}
+      .guide{stroke:#6b7280;stroke-width:2;stroke-dasharray:10 10}
+      .event{stroke:#111;stroke-width:2;stroke-dasharray:8 8}
+      .dot{fill:#0646d8}
+      .open {fill: white; stroke: #0646d8; stroke-width: 3; }
+      .label{font-family:Georgia,serif;font-style:italic;font-size:30px;fill:#111}
+      .text{font-family:Arial,Helvetica,sans-serif;font-size:22px;fill:#111}
+      .title{font-family:Arial,Helvetica,sans-serif;font-size:34px;font-weight:700;fill:#07112f}
+      .blue{fill:#0646d8}
+      .small{font-size:20px}
+      .box-title{font-size:24px;font-weight:700}
+    </style>
+  </defs>
+
+  <!-- Title -->
+
+  <!-- Axes -->
+  <line x1="90" y1="570" x2="1320" y2="570" class="axis"/>
+  <line x1="90" y1="570" x2="90" y2="95" class="axis"/>
+
+  <text x="1330" y="602" class="label">t</text>
+  <text x="30" y="75" class="label">X(t)</text>
+  <text x="65" y="602" class="text">0</text>
+
+  <!-- Coordinates -->
+  <!-- x positions: T1=350, T2=600, T3=875, T4=1075, T5=1280 -->
+  <!-- y levels: x0=500, x1=370, x2=285, x3=190 -->
+
+  <!-- horizontal guide lines -->
+  <line x1="90" y1="370" x2="350" y2="370" class="guide"/>
+  <line x1="90" y1="285" x2="600" y2="285" class="guide"/>
+  <line x1="90" y1="190" x2="875" y2="190" class="guide"/>
+
+  <!-- y labels -->
+  <text x="42" y="508" class="label">x₀</text>
+  <text x="42" y="378" class="label">x₁</text>
+  <text x="42" y="293" class="label">x₂</text>
+  <text x="42" y="198" class="label">x₃</text>
+
+  <!-- event vertical dashed black lines -->
+  <line x1="350" y1="570" x2="480" y2="570" class="event" opacity="0"/>
+  <line x1="350" y1="570" x2="350" y2="475" class="event"/>
+  <line x1="600" y1="570" x2="600" y2="415" class="event"/>
+  <line x1="875" y1="570" x2="875" y2="405" class="event"/>
+  <line x1="1075" y1="570" x2="1075" y2="395" class="event"/>
+  <line x1="1280" y1="570" x2="1280" y2="390" class="event"/>
+
+  <!-- multiplicative drops -->
+  <line x1="350" y1="370" x2="350" y2="475" class="drop"/>
+  <line x1="600" y1="285" x2="600" y2="415" class="drop"/>
+  <line x1="875" y1="190" x2="875" y2="405" class="drop"/>
+  <line x1="1075" y1="285" x2="1075" y2="395" class="drop"/>
+  <line x1="1280" y1="235" x2="1280" y2="395" class="drop"/>
+
+  <!-- AIMD trajectory -->
+<path d="M 90 500
+    L 350 370
+    M 350 475
+    L 600 285
+    M 600 415
+    L 875 190
+    M 875 405
+    L 1075 285
+    M 1075 395
+    L 1280 235"
+  class="curve"/>
+
+  <!-- dots -->
+  <circle cx="90" cy="500" r="7" class="dot"/>
+  <circle cx="350" cy="370" r="7" class="open"/>
+  <circle cx="350" cy="475" r="7" class="dot"/>
+  <circle cx="600" cy="285" r="7" class="open"/>
+  <circle cx="600" cy="415" r="7" class="dot"/>
+  <circle cx="875" cy="190" r="7" class="open"/>
+  <circle cx="875" cy="405" r="7" class="dot"/>
+  <circle cx="1075" cy="285" r="7" class="open"/>
+  <circle cx="1075" cy="395" r="7" class="dot"/>
+  <circle cx="1280" cy="235" r="7" class="open"/>
+  <circle cx="1280" cy="395" r="7" class="dot"/>
+
+  <!-- x-axis event labels -->
+  <text x="350" y="603" text-anchor="middle" class="label">T₁</text>
+  <text x="600" y="603" text-anchor="middle" class="label">T₂</text>
+  <text x="875" y="603" text-anchor="middle" class="label">T₃</text>
+  <text x="1075" y="603" text-anchor="middle" class="label">T₄</text>
+  <text x="1280" y="603" text-anchor="middle" class="label">T₅</text>
+
+  <!-- jump labels -->
+  <text x="365" y="500" class="label blue">p x₁</text>
+  <text x="615" y="445" class="label blue">p x₂</text>
+  <text x="890" y="430" class="label blue">p x₃</text>
+  <text x="1090" y="418" class="label blue">p x₄</text>
+  <text x="1292" y="405" class="label blue">p x₅</text>
+
+  <!-- bottom explanation boxes -->
+<rect x="90" y="645" width="480" height="150" rx="8" fill="#f5fff6" stroke="#8bb98f"/>
+<line x1="115" y1="745" x2="180" y2="680" class="curve" stroke-width="4"/>
+<text x="200" y="695" class="text box-title" fill="#0b6623">Additive Increase</text>
+<text x="200" y="735" class="text small">Between events, the process grows</text>
+<text x="200" y="765" class="text small">linearly with constant rate a &gt; 0.</text>
+
+<rect x="670" y="645" width="650" height="150" rx="8" fill="#fff4f7" stroke="#c58aa0"/>
+<line x1="715" y1="680" x2="715" y2="760" class="drop"/>
+<circle cx="715" cy="675" r="6" class="dot"/>
+<circle cx="715" cy="765" r="6" class="dot"/>
+<text x="760" y="695" class="text box-title blue">Multiplicative Decrease</text>
+<text x="760" y="735" class="text small">At random epochs Tₖ, the process jumps to a fraction of</text>
+<text x="760" y="765" class="text small"> its current value, that is, X(T<tspan baseline-shift="sub" font-size="70%">k</tspan>) = p<tspan baseline-shift="sub" font-size="70%">k</tspan> X(T<tspan baseline-shift="sub" font-size="70%">k<tspan baseline-shift="super" font-size="70%">−</tspan></tspan>), 0 &lt; p<tspan baseline-shift="sub" font-size="70%">k</tspan> &lt; 1. </text>
+
+</svg>
