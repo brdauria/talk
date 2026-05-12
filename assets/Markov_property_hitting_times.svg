@@ -1,0 +1,155 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="50 25 800 445" width="800" height="400">
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+      <path d="M0,0 L10,4 L0,8 Z" fill="#222"/>
+    </marker>
+
+    <style>
+      .axis { stroke:#222; stroke-width:2.2; fill:none; marker-end:url(#arrow); }
+      .level { stroke:#666; stroke-width:1.8; stroke-dasharray:7 7; }
+      .path { stroke:#111; stroke-width:3.2; fill:none; stroke-linecap:round; stroke-linejoin:round; }
+      .guide { stroke:#cc2b2b; stroke-width:1.5; stroke-dasharray:5 5; opacity:.7; }
+      .hit { fill:#cc2b2b; stroke:white; stroke-width:2; }
+      .hit-ring { fill:none; stroke:#cc2b2b; stroke-width:2; opacity:.65; }
+      .frame { fill:white; stroke:#111; stroke-width:2.4; rx:16; }
+
+      .label {
+        font-family:"Times New Roman", Georgia, serif;
+        font-size:28px;
+        fill:#111;
+      }
+
+      .small { font-size:22px; }
+
+      .caption {
+        font-family:Inter, Arial, sans-serif;
+        font-size:18px;
+        fill:#333;
+      }
+
+      .math {
+        font-family:"Times New Roman", Georgia, serif;
+        font-style:italic;
+        fill:#111;
+      }
+
+      .mathrm {
+        font-family:"Times New Roman", Georgia, serif;
+        font-style:normal;
+        fill:#111;
+      }
+
+      .sub {
+        baseline-shift:sub;
+        font-size:65%;
+        letter-spacing:-0.04em;
+      }
+
+      .sup {
+        baseline-shift:super;
+        font-size:65%;
+        letter-spacing:-0.04em;
+      }
+    </style>
+  </defs>
+
+  <!-- white background 
+  <rect x="0" y="0" width="900" height="640" fill="white"/>
+  -->
+
+  <line x1="110" y1="430" x2="830" y2="430" class="axis"/>
+  <line x1="110" y1="430" x2="110" y2="70" class="axis"/>
+
+  <line x1="110" y1="140" x2="790" y2="140" class="level"/>
+  <line x1="110" y1="285" x2="790" y2="285" class="level"/>
+
+  <path class="path"
+        d="M110 430
+           C125 370,145 310,180 324
+           C205 335,208 375,225 350
+           C239 331,237 304,250 302
+           C265 300,270 350,292 346
+           C318 342,320 300,350 295
+           C382 290,375 340,405 330
+           C435 320,430 305,465 285
+           C490 256,500 242,520 250
+           C540 258,535 185,555 185
+           C575 185,570 260,590 305
+           C606 342,635 323,638 282
+           C641 235,633 186,658 195
+           C681 204,675 232,706 230
+           C733 228,724 203,747 198
+           C773 192,775 158,787 140"/>
+
+  <line x1="465" y1="285" x2="465" y2="430" class="guide"/>
+  <line x1="787" y1="140" x2="787" y2="430" class="guide"/>
+
+  <circle cx="465" cy="285" r="9" class="hit"/>
+  <circle cx="465" cy="285" r="16" class="hit-ring"/>
+
+  <circle cx="787" cy="140" r="9" class="hit"/>
+  <circle cx="787" cy="140" r="16" class="hit-ring"/>
+
+  <g stroke="#cc2b2b" stroke-width="1.4">
+    <line x1="465" y1="264" x2="465" y2="306"/>
+    <line x1="444" y1="285" x2="486" y2="285"/>
+    <line x1="450" y1="270" x2="480" y2="300"/>
+    <line x1="480" y1="270" x2="450" y2="300"/>
+
+    <line x1="787" y1="119" x2="787" y2="161"/>
+    <line x1="766" y1="140" x2="808" y2="140"/>
+    <line x1="772" y1="125" x2="802" y2="155"/>
+    <line x1="802" y1="125" x2="772" y2="155"/>
+  </g>
+
+  <text x="86" y="438" class="label small">0</text>
+
+  <text x="86" y="147" class="label">
+    <tspan class="math">a</tspan>
+  </text>
+
+  <text x="86" y="292" class="label">
+    <tspan class="math">x</tspan>
+  </text>
+
+  <text x="815" y="458" class="label">
+    <tspan class="math">t</tspan>
+  </text>
+
+  <text x="72" y="82" class="label">
+    <tspan class="math">X</tspan><tspan class="math sub" dx="-4">t</tspan>
+  </text>
+
+  <text x="458" y="458" class="label">
+    <tspan class="math">τ</tspan><tspan class="math sub" dx="-4">x</tspan><tspan class="math sup" dx="-5">↑</tspan>
+  </text>
+
+  <text x="778" y="458" class="label">
+    <tspan class="math">τ</tspan><tspan class="math sub" dx="-4">a</tspan><tspan class="math sup" dx="-5">↑</tspan>
+  </text>
+
+  <path d="M125 405 C225 365,340 330,452 292"
+        stroke="#777" stroke-width="1.4" fill="none" stroke-dasharray="4 5"/>
+
+  <text x="290" y="386" class="label small">
+    <tspan class="math">𝒁 </tspan><tspan class="mathrm">(0 ↑ </tspan><tspan class="math">x</tspan><tspan class="mathrm">)</tspan>
+  </text>
+
+  <path d="M482 275 C590 230,690 185,778 148"
+        stroke="#777" stroke-width="1.4" fill="none" stroke-dasharray="4 5"/>
+
+  <text x="570" y="177" class="label small">
+    <tspan class="math">𝒁 </tspan><tspan class="mathrm">(</tspan><tspan class="math">x</tspan><tspan class="mathrm"> ↑ </tspan><tspan class="math">a</tspan><tspan class="mathrm">)</tspan>
+  </text>
+
+  <text x="300" y="55" class="label small">
+    <tspan class="math">τ</tspan><tspan class="math sub" dx="-1">a</tspan><tspan class="math sup" dx="-5">↑</tspan>
+    <tspan class="mathrm">(0, </tspan><tspan class="math">J</tspan><tspan class="mathrm">(0))</tspan>
+    <tspan class="mathrm"> ≍ </tspan>
+    <tspan class="math">τ</tspan><tspan class="math sub" dx="-1">x</tspan><tspan class="math sup" dx="-5">↑</tspan>
+    <tspan class="mathrm">(0, </tspan><tspan class="math">J</tspan><tspan class="mathrm">(0))</tspan>
+    <tspan class="mathrm"> + </tspan>
+    <tspan class="math">τ</tspan><tspan class="math sub" dx="-1">a</tspan><tspan class="math sup" dx="-5">↑</tspan>
+    <tspan class="mathrm">(</tspan><tspan class="math">x</tspan><tspan class="mathrm">, </tspan><tspan class="math">J</tspan><tspan class="mathrm">(</tspan><tspan class="math">τ</tspan><tspan class="math sub" dx="0">x</tspan><tspan class="math sup" dx="-5">↑</tspan><tspan class="mathrm">))</tspan>
+  </text>
+</svg>
