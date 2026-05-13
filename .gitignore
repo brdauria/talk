@@ -67,7 +67,7 @@ env/
 *_export.pdf
 *-export.pdf
 print.pdf
-slides.pdf
+# slides.pdf
 
 # Temporary files
 *.tmp
