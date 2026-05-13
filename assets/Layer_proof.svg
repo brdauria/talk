@@ -1,0 +1,361 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="50 50 880 640" width="980" height="500">
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+      <path d="M0,0 L10,4 L0,8 Z" fill="#222"/>
+    </marker>
+
+    <style>
+      .figure-bg {
+        fill: #ffffff;
+      }
+
+      .panel {
+        fill: #ffffff;
+        stroke: #111;
+        stroke-width: 3.2;
+        rx: 16;
+      }
+
+      .level {
+        stroke: #333;
+        stroke-width: 1.6;
+        stroke-dasharray: 7 6;
+      }
+
+      .solid-level {
+        stroke: #333;
+        stroke-width: 1.7;
+      }
+
+      .path-up {
+        stroke: #111;
+        stroke-width: 2.8;
+        fill: none;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+      }
+
+      .path-down {
+        stroke: #777;
+        stroke-width: 2.4;
+        fill: none;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+      }
+
+      .jump {
+        stroke: #111;
+        stroke-width: 2.2;
+        fill: none;
+        marker-end: url(#arrow);
+      }
+
+      .hit {
+        fill: #c82333;
+        stroke: #fff;
+        stroke-width: 2;
+      }
+
+      .hit-ring {
+        fill: none;
+        stroke: #c82333;
+        stroke-width: 1.9;
+        opacity: .8;
+      }
+
+      .hit-ray {
+        stroke: #c82333;
+        stroke-width: 1.35;
+      }
+
+      .region {
+        fill: #f5f7fb;
+        stroke: none;
+        opacity: .9;
+      }
+
+      .label {
+        font-family: "Times New Roman", Georgia, serif;
+        font-size: 24px;
+        fill: #111;
+      }
+
+      .small {
+        font-size: 19px;
+      }
+
+      .tiny {
+        font-size: 15px;
+      }
+
+      .caption {
+        font-family: Inter, Arial, sans-serif;
+        font-size: 16px;
+        fill: #333;
+      }
+
+      .title {
+        font-family: Inter, Arial, sans-serif;
+        font-weight: 600;
+        font-size: 17px;
+        fill: #111;
+      }
+
+      .note {
+        font-family: Inter, Arial, sans-serif;
+        font-size: 14px;
+        fill: #555;
+      }
+
+      .math {
+        font-family: "Times New Roman", Georgia, serif;
+        font-style: italic;
+        fill: #111;
+      }
+
+      .mathrm {
+        font-family: "Times New Roman", Georgia, serif;
+        font-style: normal;
+        fill: #111;
+      }
+
+      .sub {
+        baseline-shift: sub;
+        font-size: 65%;
+        letter-spacing: -0.04em;
+      }
+
+      .sup {
+        baseline-shift: super;
+        font-size: 65%;
+        letter-spacing: -0.04em;
+      }
+
+      .eq-box {
+        fill: #fff;
+        stroke: #ddd;
+        stroke-width: 1.2;
+        rx: 10;
+      }
+    </style>
+  </defs>
+
+  <!-- white background -->
+  <rect class="figure-bg" x="50" y="50" width="880" height="640"/>
+
+  <!-- global title 
+  <text x="490" y="36" text-anchor="middle" class="title">
+    First-step decomposition for the AIMD exit problem
+  </text>-->
+
+  <!-- ===================== TOP LEFT PANEL ===================== -->
+
+  <g transform="translate(70,70)">
+    <rect class="panel" x="0" y="0" width="390" height="270"/>
+
+    <text x="195" y="25" text-anchor="middle" class="title">
+      jump before reaching <tspan class="math">a/ρ</tspan>
+    </text>
+
+    <rect class="region" x="54" y="70" width="282" height="80"/>
+
+    <line class="level" x1="55" y1="70" x2="335" y2="70"/>
+    <line class="solid-level" x1="55" y1="150" x2="335" y2="150"/>
+    <line class="solid-level" x1="55" y1="225" x2="335" y2="225"/>
+
+    <text x="28" y="77" class="label small">
+      <tspan class="math">a</tspan><tspan class="mathrm">/ρ</tspan>
+    </text>
+
+    <text x="35" y="157" class="label small">
+      <tspan class="math">a</tspan>
+    </text>
+
+    <text x="35" y="232" class="label small">
+      <tspan class="math">b</tspan>
+    </text>
+
+    <!-- upward motion before jump -->
+    <line class="path-up" x1="82" y1="150" x2="155" y2="92"/>
+
+    <!-- multiplicative jump down -->
+    <path class="jump" d="M155 92 L155 178"/>
+
+    <!-- post-jump evolution -->
+    <path class="path-down"
+          d="M155 178
+             C178 190,202 176,217 190
+             C231 204,226 222,247 224
+             C271 227,279 205,293 195"/>
+
+    <!-- return-to-a path -->
+    <path class="path-up"
+          d="M155 178
+             C177 166,189 175,202 160
+             C214 146,226 154,239 140
+             C253 126,267 134,280 120
+             C294 104,305 96,320 91"/>
+
+    <!-- hit at a -->
+    <circle cx="220" cy="150" r="7" class="hit"/>
+    <circle cx="220" cy="150" r="15" class="hit-ring"/>
+    <g class="hit-ray"  transform="translate(-100,0)">
+      <line x1="320" y1="131" x2="320" y2="169"/>
+      <line x1="301" y1="150" x2="339" y2="150"/>
+      <line x1="307" y1="137" x2="333" y2="163"/>
+      <line x1="333" y1="137" x2="307" y2="163"/>
+    </g>
+
+    <!-- down hit at b -->
+    <circle cx="250" cy="225" r="7" class="hit"/>
+    <circle cx="250" cy="225" r="15" class="hit-ring"/>
+
+    <g class="hit-ray" transform="translate(-43,0)">
+      <line x1="293" y1="206" x2="293" y2="244"/>
+      <line x1="274" y1="225" x2="312" y2="225"/>
+      <line x1="280" y1="212" x2="306" y2="238"/>
+      <line x1="306" y1="212" x2="280" y2="238"/>
+    </g>
+
+    <rect class="eq-box" x="72" y="236" width="245" height="25"/>
+    <text x="195" y="254" text-anchor="middle" class="note">
+      solve by conditioning after the jump
+    </text>
+  </g>
+
+  <!-- ===================== TOP RIGHT PANEL ===================== -->
+
+  <g transform="translate(520,70)">
+    <rect class="panel" x="0" y="0" width="390" height="270"/>
+
+    <text x="195" y="25" text-anchor="middle" class="title">
+      upward crossing
+    </text>
+
+    <rect class="region" x="54" y="70" width="282" height="80"/>
+
+    <line class="level" x1="55" y1="70" x2="335" y2="70"/>
+    <line class="solid-level" x1="55" y1="150" x2="335" y2="150"/>
+    <line class="solid-level" x1="55" y1="225" x2="335" y2="225"/>
+
+    <text x="28" y="77" class="label small">
+      <tspan class="math">a</tspan><tspan class="mathrm">/ρ</tspan>
+    </text>
+
+    <text x="35" y="157" class="label small">
+      <tspan class="math">a</tspan>
+    </text>
+
+    <text x="35" y="232" class="label small">
+      <tspan class="math">b</tspan>
+    </text>
+
+    <path class="path-up" d="M72 150 L245 45"/>
+
+    <circle cx="200" cy="70" r="7" class="hit"/>
+    <circle cx="200" cy="70" r="15" class="hit-ring"/>
+
+    <g class="hit-ray" transform="translate(22,0)">
+      <line x1="178" y1="51" x2="178" y2="89"/>
+      <line x1="159" y1="70" x2="197" y2="70"/>
+      <line x1="165" y1="57" x2="191" y2="83"/>
+      <line x1="191" y1="57" x2="165" y2="83"/>
+    </g>
+
+    <rect class="eq-box" x="72" y="236" width="245" height="25"/>
+    <text x="195" y="254" text-anchor="middle" class="note">
+      reaches <tspan class="math">a/ρ</tspan> before a jump
+    </text>
+  </g>
+
+  <!-- ===================== BOTTOM LEFT PANEL ===================== -->
+
+  <g transform="translate(70,390)">
+    <rect class="panel" x="0" y="0" width="390" height="250"/>
+
+    <text x="195" y="25" text-anchor="middle" class="title">
+      downward exit
+    </text>
+
+    <rect class="region" x="54" y="82" width="282" height="108"/>
+
+    <line class="level" x1="55" y1="82" x2="335" y2="82"/>
+    <line class="solid-level" x1="55" y1="190" x2="335" y2="190"/>
+
+    <text x="28" y="89" class="label small">
+      <tspan class="math">b</tspan><tspan class="mathrm">/p</tspan>
+    </text>
+
+    <text x="35" y="197" class="label small">
+      <tspan class="math">b</tspan>
+    </text>
+
+    <path class="path-up" d="M72 190 L170 120"/>
+
+    <path class="jump" d="M170 120 L170 215"/>
+
+    <circle cx="170" cy="190" r="7" class="hit"/>
+    <circle cx="170" cy="190" r="15" class="hit-ring"/>
+
+    <g class="hit-ray">
+      <line x1="170" y1="171" x2="170" y2="209"/>
+      <line x1="151" y1="190" x2="189" y2="190"/>
+      <line x1="157" y1="177" x2="183" y2="203"/>
+      <line x1="183" y1="177" x2="157" y2="203"/>
+    </g>
+
+    <rect class="eq-box" x="78" y="212" width="235" height="25"/>
+    <text x="195" y="230" text-anchor="middle" class="note">
+      hit <tspan class="math">b</tspan> by a jump
+    </text>
+  </g>
+
+  <!-- ===================== BOTTOM RIGHT PANEL ===================== -->
+
+  <g transform="translate(520,390)">
+    <rect class="panel" x="0" y="0" width="390" height="250"/>
+
+    <text x="195" y="25" text-anchor="middle" class="title">
+      upward crossing
+    </text>
+
+    <rect class="region" x="54" y="82" width="282" height="108"/>
+
+    <line class="level" x1="55" y1="82" x2="335" y2="82"/>
+    <line class="solid-level" x1="55" y1="190" x2="335" y2="190"/>
+
+    <text x="28" y="89" class="label small">
+      <tspan class="math">b</tspan><tspan class="mathrm">/p</tspan>
+    </text>
+
+    <text x="35" y="197" class="label small">
+      <tspan class="math">b</tspan>
+    </text>
+
+    <path class="path-up" d="M72 190 L230 50"/>
+
+    <circle cx="194" cy="82" r="7" class="hit"/>
+    <circle cx="194" cy="82" r="15" class="hit-ring"/>
+
+    <g class="hit-ray">
+      <line x1="194" y1="63" x2="194" y2="101"/>
+      <line x1="175" y1="82" x2="213" y2="82"/>
+      <line x1="181" y1="69" x2="207" y2="95"/>
+      <line x1="207" y1="69" x2="181" y2="95"/>
+    </g>
+
+    <rect class="eq-box" x="78" y="212" width="235" height="25"/>
+    <text x="195" y="230" text-anchor="middle" class="note">
+      reach <tspan class="math">b/p</tspan> before jumping
+    </text>
+  </g>
+
+  <!-- bottom summary formula -->
+
+  <text x="490" y="675" text-anchor="middle" class="label small">
+    <tspan class="mathrm">split the exit problem by conditioning on the first event in </tspan>
+    <tspan class="math">[a,a/ρ]</tspan>
+    <tspan class="mathrm"> and </tspan>
+    <tspan class="math">[b,b/p)</tspan>
+  </text>
+</svg>

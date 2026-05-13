@@ -427,7 +427,7 @@
         </section>
 
         <section>
-          <h2>Markov modulated AIMD sample path</h2>
+          <h2>Strong Markov property at the hitting times</h2>
           <div class="figure-card">
             <img class="figure" src="assets/Markov_property_hitting_times.svg"
               alt="Diagram showing the strong Markov property at the hitting times" />
@@ -576,15 +576,16 @@
             falls into a region already computed.
           </aside>
         </section>
+
         <section>
           <h2>Two-sided upward exit &mdash; starting interval \([b,b/p)\)</h2>
           <div class="theorem-box math-small">
             <p> We have that, for any \(x\in[b,b/p)\), where \(p=\max_i p_i\),
-              the following identity holds: 
-            \begin{align*}
-            %\mL\!\left(b\!\up_b^x\right) &= \mExp\!\bigl(-(x-b)\vecz\bigr),\\
-            \mL\!\left(x\!\up_b^{b/p}\right)& =\mExp\!\bigl(-(b/p-x)\vecp \vecgamma\bigr).
-            \end{align*}
+              the following identity holds:
+              \begin{align*}
+              %\mL\!\left(b\!\up_b^x\right) &= \mExp\!\bigl(-(x-b)\vecz\bigr),\\
+              \mL\!\left(x\!\up_b^{b/p}\right)& =\mExp\!\bigl(-(b/p-x)\vecp \vecgamma\bigr).
+              \end{align*}
             </p>
           </div>
           <div class="proof-box math-xsmall">
@@ -636,6 +637,14 @@
             On the interval \([b,b/p)\), no regime switch can occur before exiting,
             so the transform reduces to a simple exponential survival probability.
           </aside>
+        </section>
+
+        <section>
+          <h2>First-step decomposition for the AIMD exit problem</h2>
+          <div class="figure-card">
+            <img class="figure" src="assets/Layer_proof.svg"
+              alt="First-step decomposition for the AIMD exit problem" />
+          </div>
         </section>
       </section>
 
