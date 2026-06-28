@@ -21,14 +21,34 @@
         </pre>
       </section>-->
 
-      <section class="title-slide">
-        <a href="https://ecqt2026.sciencesconf.org" target="_blank" rel="noopener noreferrer"><span class="kicker">ECQT
-            2026, 11-13 May 2026 Reykjavík (Iceland)</span></a>
-        <h1>Exit Problems for<br />Additive-Increase Multiplicative-Decrease<br />Markov-Modulated Processes</h1>
-        <p><strong>Bernardo D'Auria</strong> <span class="muted">(University of Padova)</span></p>
-        <p class="muted">Joint work with <strong>Zbigniew Palmowski</strong> <span class="muted">(Wrocław University of
-            Science and Technology)</span></p>
-        <aside class="notes">
+      <section class="title-slide unipd-title-slide">
+        <div class="unipd-cover-mark" aria-hidden="true"></div>
+
+        <div class="unipd-cover-top">
+          <div class="unipd-event">
+            <a href="https://sites.google.com/view/iwspa2026/home" target="_blank"
+              rel="noopener noreferrer">IWSPA2026 &dash; Badajoz (Spain)</a>
+            <span>June, 30<sup>th</sup> &dash; July, 2<sup>nd</sup> 2026</span>
+          </div>
+        </div>
+
+        <div class="unipd-cover-main">
+          <div class="unipd-kicker">AIMD processes · Markovian environment</div>
+          <h1>Exit Problems for AIMD<br />in a Markovian Environment</h1>
+          <div class="unipd-authors">
+            <strong>Bernardo D'Auria</strong> <span>University of Padova</span><br />
+            Joint work with <strong class="coauthor-name">Zbigniew Palmowski</strong> <span>Wrocław University of
+              Science and Technology</span>
+          </div>
+        </div>
+
+        <span class="coauthor-portrait" aria-hidden="true">
+          <span class="coauthor-portrait-frame"><img src="assets/Zbigniew_Palmowski.jpg" alt="" /></span>
+          <span class="coauthor-portrait-name">Z. Palmowski</span>
+        </span>
+        <img class="unipd-logo-bottom-right" src="assets/unipd-logo.svg" alt="Università degli Studi di Padova" />
+
+        <aside class="notes">25-minutes talk.
           Open with the scalar AIMD picture, then state the Markov-modulated extension. Emphasize the goal:
           matrix-valued exit transforms and a constructive method.
         </aside>
@@ -400,7 +420,9 @@
 
       <section>
         <section>
-          <h2>Upward one-sided exit: the skip-free factorization</h2>
+          <h2>Upward one-sided exit:
+            <span class="math small">$\mZ(x\up a) = \E_x\!\big[\e^{-w\tau_a^\up};\,J(\tau_a^\up)\big]$</span>
+          </h2>
           <div class="theorem-box compact">
             <p>For $0\lt x\lt a$, upward passage is continuous, so the process must cross $x$ before $a$.</p>
             <p class="eq">\[
@@ -497,9 +519,9 @@
               \]</p>
             <p class="eq small">\[
               Z^\up(w;0,x)=
-              \left[\sum_{k=0}^{\infty}
+              \left(\sum_{k=0}^{\infty}
               \frac{(x/(w+\lambda))^k}{k!}\,
-              (\lambda/(w+\lambda);p)_k\right]^{-1}.
+              (\lambda/(w+\lambda);p)_k\right)^{-1}.
               \]</p>
           </div>
           <div class="card compact">
@@ -519,28 +541,28 @@
       </section>
 
       <section>
-        <h2>Downward one-sided exit</h2>
+        <h2>Downward one-sided exit:
+          <span class="math small">$\mZ(x\down b) = \E_x\!\big[\e^{-w\tau_b^\down};\,J(\tau_b^\down)\big]$</span>
+        </h2>
         <p>For $x>b$, first-step analysis gives a renewal equation in the opposite direction:</p>
         <div class="theorem-box math-small">
           \[
-          Z^{\down}_{ij}(w,x,b)=
+          Z_{ij}(w,x \down b)=
           \sum_k q_{ik}\gamma_i\e^{z_ix}
-          \int_{p_ix}^{\infty} Z^{\down}_{kj}(w,y,b)\,
+          \int_{p_ix}^{\infty} Z_{kj}(w,y \down b)\,
           \e^{-(z_i/p_i)y}\,dy,
-          \qquad \mZ^{\down}(x,b)=\mId\;\text{ for }x\le b.
+          \qquad \mZ(x \down b)=\mId\;\text{ for }x\le b.
           \]
         </div>
-        <p>With $\tmZ^{\down}(s)=\int_0^\infty\e^{-sx} \mZ^{\down}(x,b)\,dx$,</p>
+        <p>With $\tmZ(s)=\int_0^\infty\e^{-sx} \mZ(x \down b)\,dx$,</p>
         <div class="method-box math-small">
-          \[
-          \tmZ^{\down}(s)=\sum_h \mA(s) \mE_h \mQ
-          \left(\tmZ^{\down}(s/p_h)-\tmZ^{\down}(z_h/p_h)\right).
-          \]
-          \[
-          \tmZ^{\down}(s)=\mA(s)\mD(s)\mH,
+          \begin{align*}
+          \tmZ(s) &=\sum_h \mA(s) \mE_h \mQ
+          \left(\tmZ(s/p_h)-\tmZ(z_h/p_h)\right). \\
+          \tmZ(s)&=\mA(s)\mD(s)\mH,
           \qquad
-          \mH=-\sum_h \mE_h\mQ\tmZ^{\down}(z_h/p_h).
-          \]
+          \mH=-\sum_h \mE_h\mQ\tmZ(z_h/p_h).
+          \end{align*}
         </div>
         <p class="small muted">The matrix $\mH$ is then recovered by solving a system of equations at the limiting
           arguments obtained for $s \to z_h/p_h$, $h\in E$.</p>
@@ -552,8 +574,11 @@
 
       <section>
         <section>
-          <h2>Two-sided upward exit</h2>
-          <p>Let $\mL(x\up_b^a)$ denote the transform of the upward exit time before downward exit. <br> We use a
+          <h2>Two-sided upward exit:
+            <span class="math small">$\mL(x\!\up_b^a) =
+              \E_x\!\big[\e^{-w\tau_a^\up};\,\tau_a^\up\lt\tau_b^\down,\,J(\tau_a^\up)\big]$</span>
+          </h2>
+          <p>Let $\mL(x\!\up_b^a)$ denote the transform of the upward exit time before downward exit. <br> We use a
             constructive recursion to compute it.</p>
           <div class="theorem-box math-small">
             <p>Assuming $\mL(y\up_b^a)$ known for all $y\lt a$, with $\rho\lt\min_i p_i$, <br />
@@ -642,14 +667,16 @@
         <section>
           <h2>First-step decomposition for the AIMD exit problem</h2>
           <div class="figure-card">
-            <img class="figure" src="assets/Layer_proof.svg"
-              alt="First-step decomposition for the AIMD exit problem" />
+            <img class="figure" src="assets/Layer_proof.svg" alt="First-step decomposition for the AIMD exit problem" />
           </div>
         </section>
       </section>
 
-      <section>
-        <h2>Two-sided downward exit</h2>
+      <section data-visibility="hidden">
+        <h2>Two-sided downward exit:
+            <span class="math small">$\mL(x\!\down_b^a) =
+              \E_x\!\big[\e^{-w\tau_b^\down};\,\tau_b^\down\lt\tau_a^\up,\,J(\tau_b^\down)\big]$</span>
+          </h2>
         <p>Define</p>
         <p class="eq small">\[
           L^{\down}_{ij}(w,x\down_b^a)=\E_{x,i}\big[\e^{-w\tau_b^\down};\tau_b^\down\lt\tau_a^\up,\,J(\tau_b^\down)=j\big].
@@ -683,14 +710,14 @@
               -\int_{0}^{\tau_{a,b}(x)\wedge t} \mathcal{A}^{\dagger}
               F\bigl(w; X_s\up_b^a\bigr)\, ds \]
               is a local martingale, where
-              \[F(w,x\up_b^a)=Z(w,x\down_b)+L(w,x\up_b^a)\]
+              \[F(w,x\up_b^a)=Z(w,x\down b)+L(w,x\up_b^a)\]
             </p>
           </div>
           <div class="rows">
             <div class="error-box compact">
               <p>Defining a similar object for the modulated version of the reflected process,</p>
               <p class="eq">\[
-                \mF(x\up_b^a) \approx \mZ(x\down_b)+\mL(x\up_b^a)\]</p>
+                \mF(x\up_b^a) \approx \mZ(x\down b)+\mL(x\up_b^a)\]</p>
               <p>does not work.</p>
             </div>
             <div class="method-box compact fragment">
@@ -752,7 +779,7 @@
         </aside>
       </section>
 
-      <section>
+      <section data-visibility="hidden">
         <h2>Extension step for modulated barriers</h2>
         <p>Assume $\mZ(y\up \veca\wedge\ell)$ is known for $y\lt\ell$. Choose $\rho$ so that $p_i x\lt\ell$ for
           $x\in[\ell,\ell/\rho)$.</p>
@@ -959,26 +986,6 @@
             </div>
           </div>
         </section>
-      </section>
-
-      <section>
-        <h2 class="backup">Boundary conventions</h2>
-        <div class="cols">
-          <div class="card compact">
-            <p>Upward crossing is by creeping:</p>
-            <p class="eq">\[
-              X(\tau_a^\up)=a.
-              \]</p>
-          </div>
-          <div class="card compact">
-            <p>Downward crossing is by a jump:</p>
-            <p class="eq">\[
-              X(\tau_b^\down)\le b.
-              \]</p>
-          </div>
-        </div>
-        <p class="callout small">This asymmetry is why upward identities factor cleanly, while downward identities
-          require integral renewal equations.</p>
       </section>
 
     </div>

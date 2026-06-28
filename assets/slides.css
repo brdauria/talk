@@ -123,6 +123,211 @@
   margin-bottom: 0.6em;
 }
 
+.reveal .slides section.unipd-title-slide {
+  position: absolute;
+  overflow: hidden;
+  padding: 58px 72px;
+  box-sizing: border-box;
+  background:
+    radial-gradient(circle at 84% 18%, rgba(255, 255, 255, 0.13) 0, rgba(255, 255, 255, 0.08) 18%, transparent 42%),
+    linear-gradient(135deg, rgb(155, 0, 20) 0%, rgb(132, 0, 18) 52%, rgb(92, 0, 14) 100%);
+  color: #fff;
+  font-family: Inter, Aptos, "Helvetica Neue", Arial, sans-serif;
+}
+
+.reveal .slides section.unipd-title-slide::after {
+  color: rgba(255, 255, 255, 0.42);
+}
+
+.reveal .unipd-title-slide .unipd-cover-mark {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.reveal .unipd-title-slide .unipd-cover-mark::before {
+  content: "";
+  position: absolute;
+  left: -120px;
+  top: -160px;
+  width: 560px;
+  height: 560px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 50%;
+}
+
+.reveal .unipd-title-slide .unipd-cover-mark::after {
+  content: "";
+  position: absolute;
+  right: -180px;
+  bottom: -220px;
+  width: 680px;
+  height: 680px;
+  border: 1px solid rgba(255, 255, 255, 0.13);
+  border-radius: 50%;
+}
+
+.reveal .unipd-title-slide .unipd-cover-top {
+  position: relative;
+  z-index: 2;
+}
+
+.reveal .unipd-title-slide .unipd-event {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 40px;
+  max-width: 1040px;
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 17px;
+  font-weight: 750;
+  text-transform: uppercase;
+  letter-spacing: 0.11em;
+}
+
+.reveal .unipd-title-slide .unipd-event a {
+  color: rgba(255, 255, 255, 0.86);
+  text-decoration: none;
+}
+
+.reveal .unipd-title-slide .unipd-event a:hover {
+  text-decoration: underline;
+}
+
+.reveal .unipd-title-slide .unipd-event sup {
+  font-size: 0.64em;
+}
+
+.reveal .unipd-title-slide .unipd-cover-main {
+  position: relative;
+  z-index: 2;
+  max-width: 980px;
+  margin-top: 88px;
+}
+
+.reveal .unipd-title-slide .unipd-kicker {
+  display: inline-block;
+  margin-bottom: 26px;
+  padding: 7px 14px;
+  border: 1px solid rgba(255, 255, 255, 0.34);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.84);
+  font-size: 17px;
+  font-weight: 750;
+  letter-spacing: 0.045em;
+}
+
+.reveal .unipd-title-slide h1 {
+  max-width: 980px;
+  margin: 0;
+  color: #fff;
+  font-size: 64px;
+  line-height: 0.98;
+  font-weight: 850;
+  letter-spacing: 0;
+}
+
+.reveal .unipd-title-slide .unipd-authors {
+  margin-top: 48px;
+  color: rgba(255, 255, 255, 0.93);
+  font-size: 23px;
+  line-height: 1.48;
+  font-weight: 520;
+}
+
+.reveal .unipd-title-slide .unipd-authors strong {
+  color: #fff;
+  font-weight: 850;
+}
+
+.reveal .unipd-title-slide .unipd-authors span {
+  color: rgba(255, 255, 255, 0.62);
+  font-size: 0.82em;
+  margin-left: 0.45em;
+}
+
+.reveal .unipd-title-slide .coauthor-name {
+  cursor: default;
+}
+
+.reveal .unipd-title-slide .coauthor-portrait {
+  position: absolute;
+  z-index: 4;
+  top: 214px;
+  right: 112px;
+  width: 178px;
+  height: 178px;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  opacity: 0;
+  transform: translateY(-8px) scale(0.96);
+  transition: opacity 160ms ease, transform 160ms ease;
+  pointer-events: none;
+}
+
+.reveal .unipd-title-slide .coauthor-portrait-frame {
+  position: absolute;
+  inset: 0;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  border: 2px solid rgba(255, 255, 255, 0.58);
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.16);
+  box-shadow: 0 22px 44px rgba(0, 0, 0, 0.26);
+  overflow: hidden;
+}
+
+.reveal .unipd-title-slide .coauthor-portrait-frame img {
+  position: absolute;
+  inset: 7px;
+  display: block;
+  width: calc(100% - 14px) !important;
+  height: calc(100% - 14px) !important;
+  max-width: none;
+  max-height: none;
+  margin: 0;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: center center;
+  transform: none;
+}
+
+.reveal .unipd-title-slide .coauthor-portrait-name {
+  position: absolute;
+  left: 50%;
+  top: calc(100% + 12px);
+  margin: 0;
+  color: rgba(255, 255, 255, 0.92);
+  font-size: 19px;
+  font-weight: 760;
+  letter-spacing: 0.02em;
+  line-height: 1;
+  text-align: center;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.32);
+  transform: translateX(-50%);
+  white-space: nowrap;
+}
+
+.reveal .unipd-title-slide:has(.coauthor-name:hover) .coauthor-portrait {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+.reveal .slides section.unipd-title-slide .unipd-logo-bottom-right {
+  position: relative;
+  z-index: 3;
+  width: 310px;
+  height: auto;
+  max-width: none;
+  max-height: none;
+  margin: 48px 0 0 auto;
+  display: block;
+  filter: drop-shadow(0 14px 28px rgba(0, 0, 0, 0.22));
+}
+
 .reveal .cols {
   margin-top: 1em;
   display: grid;
