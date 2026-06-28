@@ -1,3 +1,7 @@
+if (new URLSearchParams(window.location.search).has("print-pdf")) {
+  document.documentElement.classList.add("print-pdf-mode");
+}
+
 Reveal.initialize({
   width: 1280,
   height: 720,
@@ -8,6 +12,7 @@ Reveal.initialize({
   slideNumber: "c/t",
   transition: "slide",
   pdfSeparateFragments: false,
+  pdfMaxPagesPerSlide: 1,
   plugins: [RevealMath.MathJax3],
   mathjax3: {
     tex: {

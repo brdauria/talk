@@ -722,4 +722,13 @@
   .reveal .footer-ref {
     bottom: 10px;
   }
+
+  .reveal .slides section.unipd-title-slide .unipd-logo-bottom-right {
+    position: absolute;
+    right: 58px;
+    bottom: 44px;
+    margin: 0;
+  }
 }
+
+
