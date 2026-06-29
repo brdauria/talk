@@ -463,9 +463,9 @@
         <p>First-step analysis at the first jump gives</p>
         <div class="theorem-box math-small">
           \[
-          \mId=\mExp(-a\vecz) \mZ(0\up a)^{-1}
+          \mId=\mExp(-a\vecz) \mZ^{-1}(0\up a)
           +\mDelta(\vecgamma)\int_0^\infty
-          \mDelta(x\le a\vecp) \mExp(-(\vecz/\vecp)x) \mQ\,\mZ(0\up a)^{-1}\,dx.
+          \mDelta(x\le a\vecp) \mExp(-(\vecz/\vecp)x) \mQ\,\mZ^{-1}(0\up x)\,dx.
           \]
         </div>
         <div class="flow">
@@ -484,7 +484,7 @@
 
       <section>
         <h2>Upward one-sided exit: Laplace-domain solution</h2>
-        <p>Let $\tmU(s)=\int_0^\infty \e^{-sa} \mZ(0\up a)^{-1}\,da$. Then</p>
+        <p>Let $\tmU(s)=\int_0^\infty \e^{-sa} \mZ^{-1}(0\up a)\,da$. Then</p>
         <div class="theorem-box math-small">
           \[
           \tmU(s)=\mA(s)\mB+\mA(s)\sum_{i=1}^m \mE_i \mQ\,\tmU(s/p_i).
@@ -521,8 +521,8 @@
               Z^\up(w;0,x)=
               \left(\sum_{k=0}^{\infty}
               \frac{(x/(w+\lambda))^k}{k!}\,
-              (\lambda/(w+\lambda);p)_k\right)^{-1}.
-              \]</p>
+              {\color{blue}(\lambda/(w+\lambda);p)_k}
+              \right)^{-1}.\]</p>
           </div>
           <div class="card compact">
             <span class="label">Markov-modulated AIMD</span>
@@ -534,7 +534,7 @@
         <div class="callout small">For $m=1$, the matrix formula collapses to the scalar recursion from the previous
           paper.</div>
         <p class="small muted">From $q$-calculus:
-          $(x;q)_n = (1-x)(1-xq)(1-xq^2)\cdots(1-xq^{n-1})$</p>
+          ${\color{blue}(x;q)_n} = (1-x)(1-xq)(1-xq^2)\cdots(1-xq^{n-1})$</p>
         <aside class="notes">
           This slide is meant to reassure the audience that the new formula has the correct scalar limit.
         </aside>
@@ -750,7 +750,7 @@
         </div>
       </section>
 
-      <section>
+      <section data-visibility="hidden">
         <h2>Factorization over generated levels</h2>
         <div class="theorem-box compact">
           <p>For $x\le\ell$,</p>
@@ -876,7 +876,7 @@
         <div class="three-cols">
           <div class="theorem-box compact">
             <span class="label">1</span>
-            <p>Upward skip-free motion still gives clean multiplicative identities.</p>
+            <p>Upward skip-free motion gives clean multiplicative identities also in the modulated case.</p>
           </div>
           <div class="method-box compact">
             <span class="label">2</span>
